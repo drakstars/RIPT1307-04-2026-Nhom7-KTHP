@@ -1,0 +1,373 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  passwordHash String
+  fullName     String
+  firstName    String?
+  lastName     String?
+  bio          String?
+  settings     Json?
+  avatarUrl    String?
+  googleId     String?    @unique
+  status       UserStatus @default(ACTIVE)
+  banned       Boolean    @default(false)
+
+  roleId Int
+  role   Role @relation(fields: [roleId], references: [id])
+
+  refreshTokenHash String?
+
+  flashcardSets FlashcardSet[]
+  studyRecords  StudyRecord[]
+
+  quizzes      Quiz[]
+  quizAttempts QuizAttempt[]
+
+  dailyActivities DailyActivity[]
+
+  enrollments      Enrollment[]
+  lessonProgresses LessonProgress[]
+
+  conversations Conversation[]
+
+  subscription Subscription?
+  payments     PaymentHistory[]
+
+  notifications Notification[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vocabulary {
+  id           Int      @id @default(autoincrement())
+  word         String
+  meaning      String
+  ipa          String?
+  audioUrl     String?
+  slowAudioUrl String?
+  example      String?
+  partOfSpeech String?
+  imageUrl     String?
+  level        String?
+  topic        String?
+  flashcards   Flashcard[]
+  isPublic     Boolean  @default(true)
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model FlashcardSet {
+  id          String      @id @default(uuid())
+  title       String
+  description String?
+  userId      Int
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcards  Flashcard[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  quizzes Quiz[]
+  lessons Lesson[]
+
+  @@map("flashcard_sets")
+}
+
+model Flashcard {
+  id            String        @id @default(uuid())
+  front         String        @db.Text
+  back          String        @db.Text
+  hint          String?
+  flashcardSetId String
+  flashcardSet  FlashcardSet  @relation(fields: [flashcardSetId], references: [id], onDelete: Cascade)
+  vocabularyId  Int?
+  vocabulary    Vocabulary?   @relation(fields: [vocabularyId], references: [id], onDelete: SetNull)
+  studyRecords  StudyRecord[]
+  createdAt     DateTime      @default(now())
+
+  @@map("flashcards")
+}
+
+model StudyRecord {
+  id          String    @id @default(uuid())
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  flashcardId String
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id], onDelete: Cascade)
+  status      StudyStatus
+  reviewedAt  DateTime  @default(now())
+
+  @@map("study_records")
+}
+
+enum StudyStatus {
+  KNOWN
+  NEED_REVIEW
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  FILL_IN_BLANK
+}
+
+model Quiz {
+  id             String        @id @default(uuid())
+  title          String
+  flashcardSetId String
+  flashcardSet   FlashcardSet  @relation(fields: [flashcardSetId], references: [id], onDelete: Cascade)
+  userId         Int
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionCount  Int           @default(10)
+  shuffle        Boolean       @default(true)
+  timeLimitSecs  Int?          // null = no limit
+  questions      Question[]
+  attempts       QuizAttempt[]
+  lessons        Lesson[]
+  createdAt      DateTime      @default(now())
+
+  @@map("quizzes")
+}
+
+model Question {
+  id          String       @id @default(uuid())
+  quizId      String
+  quiz        Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  type        QuestionType
+  prompt      String       @db.Text
+  options     Json?        // String[] for MC, null for TF/Fill
+  answer      String       @db.Text
+  explanation String?      @db.Text
+  order       Int          @default(0)
+
+  @@map("questions")
+}
+
+model QuizAttempt {
+  id          String   @id @default(uuid())
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  answers     Json     // Record<questionId, string>
+  score       Int
+  totalQ      Int
+  timeTaken   Int?     // seconds
+  completedAt DateTime @default(now())
+
+  @@map("quiz_attempts")
+}
+
+model DailyActivity {
+  id        String   @id @default(uuid())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  date      DateTime @db.Date 
+  cardCount Int      @default(0)
+  quizCount Int      @default(0)
+
+  @@unique([userId, date])    
+  @@map("daily_activities")
+}
+
+enum CourseLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum LessonType {
+  READING
+  VOCABULARY
+  QUIZ
+}
+
+model Course {
+  id          String       @id @default(uuid())
+  title       String
+  description String       @db.Text
+  level       CourseLevel
+  emoji       String       @default("📖")
+  published   Boolean      @default(false)
+  order       Int          @default(0)
+  lessons     Lesson[]
+  enrollments Enrollment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("courses")
+}
+
+model Lesson {
+  id             String           @id @default(uuid())
+  courseId       String
+  course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  title          String
+  type           LessonType
+  content        String?          @db.LongText  // Markdown cho READING
+  durationMins   Int?
+  order          Int              @default(0)
+  flashcardSetId String?                        // cho VOCABULARY
+  flashcardSet   FlashcardSet?    @relation(fields: [flashcardSetId], references: [id], onDelete: SetNull)
+  quizId         String?                        // cho QUIZ
+  quiz           Quiz?            @relation(fields: [quizId], references: [id], onDelete: SetNull)
+  progresses     LessonProgress[]
+  createdAt      DateTime         @default(now())
+
+  @@map("lessons")
+}
+
+model Enrollment {
+  id         String   @id @default(uuid())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  enrolledAt DateTime @default(now())
+
+  @@unique([userId, courseId])
+  @@map("enrollments")
+}
+
+model LessonProgress {
+  id          String   @id @default(uuid())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  completedAt DateTime @default(now())
+
+  @@unique([userId, lessonId])
+  @@map("lesson_progresses")
+}
+
+enum ChatMode {
+  GRAMMAR_CHECK
+  WORD_EXPLAINER
+  FREE_CHAT
+  SENTENCE_FIXER
+}
+
+model Conversation {
+  id        String    @id @default(uuid())
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mode      ChatMode
+  title     String?   // auto-generated từ first message
+  messages  ChatMessage[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("conversations")
+}
+
+model ChatMessage {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String       // "user" | "assistant"
+  content        String       @db.LongText
+  createdAt      DateTime     @default(now())
+
+  @@map("chat_messages")
+}
+
+enum PlanType {
+  FREE
+  PRO
+  TEAM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELLED
+  EXPIRED
+  TRIALING
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model Subscription {
+  id         String             @id @default(uuid())
+  userId     Int                @unique
+  user       User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan       PlanType           @default(FREE)
+  status     SubscriptionStatus @default(ACTIVE)
+  startedAt  DateTime           @default(now())
+  expiresAt  DateTime?
+  cancelledAt DateTime?
+  payments   PaymentHistory[]
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  @@map("subscriptions")
+}
+
+model PaymentHistory {
+  id             String         @id @default(uuid())
+  subscriptionId String
+  subscription   Subscription   @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  userId         Int
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount         Float
+  currency       String         @default("USD")
+  plan           PlanType
+  billingCycle   String         // "monthly" | "annual"
+  status         PaymentStatus  @default(PENDING)
+  reference      String         @unique @default(uuid())  // mock txn id
+  receiptUrl     String?
+  paidAt         DateTime?
+  createdAt      DateTime       @default(now())
+
+  @@map("payment_histories")
+}
+
+enum NotificationType {
+  STREAK_REMINDER
+  REVIEW_DUE
+  ACHIEVEMENT
+  SYSTEM
+  PAYMENT
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    Int
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  body      String
+  read      Boolean          @default(false)
+  data      Json?            // extra payload
+  createdAt DateTime         @default(now())
+
+  @@map("notifications")
+}
