@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: elp-backend
+    runtime: node
+    rootDir: apps/backend
+    buildCommand: npm install -g pnpm && pnpm install --include=dev && npx prisma generate && npm run build
+    startCommand: node dist/src/main
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
