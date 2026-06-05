@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'umi';
 import { flashcardService } from '@/services/flashcards.service';
 import type { CreateFlashcardSetPayload } from '@/types/flashcards.type';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './create.less';
 
 interface CardField {
@@ -14,6 +15,7 @@ interface CardField {
 const CreateFlashcardSetPage: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -26,7 +28,7 @@ const CreateFlashcardSetPage: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['flashcard-sets'] });
       navigate(`/flashcards/${data.id}/study`);
     },
-    onError: () => setError('Failed to create set. Please try again.'),
+    onError: () => setError(t('failedToCreateSet')),
   });
 
   const addCard = () => setCards(c => [...c, { front: '', back: '', hint: '' }]);
@@ -36,7 +38,7 @@ const CreateFlashcardSetPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) { setError('Title is required'); return; }
+    if (!title.trim()) { setError(t('titleRequiredError')); return; }
     setError('');
     createMutation.mutate({
       title: title.trim(),
@@ -50,28 +52,28 @@ const CreateFlashcardSetPage: React.FC = () => {
   return (
     <form className={styles.page} onSubmit={handleSubmit}>
       <button type="button" className={styles.back} onClick={() => navigate('/flashcards')}>
-        ← Quay lại
+        {t('backBtn')}
       </button>
 
-      <div className={styles.heading}>Tạo bộ thẻ mới</div>
+      <div className={styles.heading}>{t('createNewSetTitle')}</div>
 
       {/* Meta */}
       <div className={styles.section}>
-        <div className={styles.sectionLabel}>Thông tin bộ thẻ</div>
+        <div className={styles.sectionLabel}>{t('setInfoTitle')}</div>
         <div className={styles.field}>
-          <label className={styles.label}>Tiêu đề *</label>
+          <label className={styles.label}>{t('setTitleLabel')}</label>
           <input
             className={styles.input}
-            placeholder="VD: Từ vựng IELTS Band 7"
+            placeholder={t('setTitlePlaceholder')}
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>Mô tả</label>
+          <label className={styles.label}>{t('setDescriptionLabel')}</label>
           <textarea
             className={styles.textarea}
-            placeholder="Mô tả ngắn (không bắt buộc)"
+            placeholder={t('setDescriptionPlaceholder')}
             value={description}
             onChange={e => setDescription(e.target.value)}
             rows={2}
@@ -80,30 +82,30 @@ const CreateFlashcardSetPage: React.FC = () => {
       </div>
 
       {/* Cards */}
-      <div className={styles.divider}>Thẻ</div>
+      <div className={styles.divider}>{t('dividerCards')}</div>
 
       {cards.map((card, i) => (
         <div key={i} className={styles.cardItem}>
           <div className={styles.cardItemHeader}>
-            <span className={styles.cardNum}>Thẻ {i + 1}</span>
+            <span className={styles.cardNum}>{t('cardIndexLabel').replace('{index}', (i + 1).toString())}</span>
             {cards.length > 1 && (
               <button type="button" className={styles.removeBtn} onClick={() => removeCard(i)}>×</button>
             )}
           </div>
           <div className={styles.cardFields}>
             <div className={styles.field}>
-              <label className={styles.label}>Mặt trước (Từ / câu hỏi)</label>
-              <input className={styles.input} placeholder="VD: Accomplish" value={card.front}
+              <label className={styles.label}>{t('frontLabel')}</label>
+              <input className={styles.input} placeholder={t('frontPlaceholder')} value={card.front}
                 onChange={e => updateCard(i, 'front', e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label className={styles.label}>Mặt sau (Định nghĩa / đáp án)</label>
-              <input className={styles.input} placeholder="VD: Hoàn thành, đạt được" value={card.back}
+              <label className={styles.label}>{t('backLabel')}</label>
+              <input className={styles.input} placeholder={t('backPlaceholder')} value={card.back}
                 onChange={e => updateCard(i, 'back', e.target.value)} />
             </div>
             <div className={styles.field}>
-              <label className={styles.label}>Gợi ý (không bắt buộc)</label>
-              <input className={styles.input} placeholder="VD: động từ" value={card.hint}
+              <label className={styles.label}>{t('hintLabel')}</label>
+              <input className={styles.input} placeholder={t('hintPlaceholder')} value={card.hint}
                 onChange={e => updateCard(i, 'hint', e.target.value)} />
             </div>
           </div>
@@ -111,17 +113,17 @@ const CreateFlashcardSetPage: React.FC = () => {
       ))}
 
       <button type="button" className={styles.addCardBtn} onClick={addCard}>
-        + Thêm thẻ
+        {t('addCardBtn')}
       </button>
 
       {error && <div className={styles.errorMsg}>{error}</div>}
 
       <div className={styles.footer}>
         <button type="button" className={styles.cancelBtn} onClick={() => navigate('/flashcards')}>
-          Hủy
+          {t('cancelBtn')}
         </button>
         <button type="submit" className={styles.submitBtn} disabled={createMutation.isPending}>
-          {createMutation.isPending ? 'Đang tạo…' : 'Tạo bộ thẻ →'}
+          {createMutation.isPending ? t('creatingBtn') : t('createSetSubmitBtn')}
         </button>
       </div>
     </form>

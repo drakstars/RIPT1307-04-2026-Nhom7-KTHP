@@ -691,7 +691,7 @@ const DashboardPage: React.FC = () => {
           <div className={styles.modalBodyContent}>
             {loadingWords ? (
               <div className={styles.modalSpinner}>
-                <Spin tip="Loading data..." />
+                <Spin description="Loading data..." />
               </div>
             ) : (
               <>

@@ -647,10 +647,6 @@ const TypeWordsPage: React.FC = () => {
     setFinalAccuracy(accuracy);
     setResultModalOpen(true);
 
-    // Call backend API to record activity
-    statsService.recordActivity('card', wordsList.length).catch(err => {
-      console.error('Failed to record activity in backend:', err);
-    });
 
     // Save article progress in localStorage
     const progressKey = `typewords_progress_${selectedBook.id}_${selectedArticle.id}`;
