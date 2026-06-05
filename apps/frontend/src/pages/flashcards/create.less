@@ -1,0 +1,211 @@
+@import '../../styles/tokens.less';
+
+.page {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-5;
+}
+
+// ─── Back button ─────────────────────────────────────────
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: @text-sm;
+  color: @text-3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: @font-base;
+  padding: 0;
+  transition: @ease-fast;
+
+  &:hover { color: @text-2; }
+}
+
+// ─── Header ──────────────────────────────────────────────
+.heading {
+  font-size: @text-xl;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+// ─── Form card ───────────────────────────────────────────
+.section {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-4;
+}
+
+.sectionLabel {
+  font-size: @text-xs;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: @text-3;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: @text-sm;
+  color: @text-2;
+}
+
+.input,
+.textarea {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: 9px 12px;
+  color: @text-1;
+  font-size: @text-sm;
+  font-family: @font-base;
+  outline: none;
+  transition: @ease-fast;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::placeholder { color: @text-3; }
+
+  &:focus {
+    border-color: @border-focus;
+    box-shadow: 0 0 0 3px rgba(232,255,87,.05);
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.55;
+}
+
+// ─── Card items ──────────────────────────────────────────
+.divider {
+  display: flex;
+  align-items: center;
+  gap: @sp-3;
+  color: @text-3;
+  font-size: @text-sm;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: @border;
+  }
+}
+
+.cardItem {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-4;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+}
+
+.cardItemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardNum {
+  font-size: @text-xs;
+  color: @text-3;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.removeBtn {
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  color: @text-3;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: @font-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: @r-sm;
+  transition: @ease-fast;
+
+  &:hover { color: @danger; background: @danger-bg; }
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: @sp-3;
+}
+
+.addCardBtn {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px dashed @border;
+  border-radius: @r-lg;
+  color: @text-3;
+  font-size: @text-sm;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    border-color: @accent;
+    color: @accent;
+    background: @accent-dim;
+  }
+}
+
+// ─── Footer actions ──────────────────────────────────────
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: @sp-3;
+}
+
+.cancelBtn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid @border;
+  border-radius: @r;
+  color: @text-2;
+  font-size: @text-sm;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover { border-color: @border-hover; color: @text-1; }
+}
+
+.submitBtn {
+  padding: 8px 20px;
+  background: @accent;
+  border: none;
+  border-radius: @r;
+  color: @accent-fg;
+  font-size: @text-sm;
+  font-weight: 500;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover { background: #d4eb4a; }
+  &:disabled { opacity: .5; cursor: not-allowed; }
+}
