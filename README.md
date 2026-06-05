@@ -165,6 +165,11 @@ Sau khi khởi chạy:
 
 ---
 
+## Link web dự án ELP
+- https://ript-1307-04-2026-nhom7-kthp.vercel.app/
+
+---
+
 ## 🔑 Tài khoản thử nghiệm
 
 | Họ tên | Email | Mật khẩu | Vai trò |
