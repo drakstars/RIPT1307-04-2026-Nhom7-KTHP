@@ -1,0 +1,180 @@
+@import '../../styles/tokens.less';
+
+.pg {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: @sp-4;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exitBtn {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: @text-2;
+    border: 1px solid transparent;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+.restartBtn {
+    height: 28px;
+    padding: 0 10px;
+    background: @bg2;
+    color: @text-1;
+    border: 1px solid @border;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.stats {
+    display: flex;
+    gap: 8px;
+}
+
+.statPill {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r-sm;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: @text-2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.statVal {
+    color: @text-1;
+    font-weight: 500;
+}
+
+.statVal.warn {
+    color: @danger;
+}
+
+.progWrap {
+    height: 1.5px;
+    background: @bg3;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progFill {
+    height: 100%;
+    background: @accent;
+    border-radius: 1px;
+    transition: width .5s linear;
+}
+
+.progFill.progWarn {
+    background: @danger;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.colLabel {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: @text-3;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.card {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all .12s;
+    font-size: 13px;
+    color: @text-2;
+    font-family: @font-base;
+    text-align: left;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &:hover {
+        border-color: @border-hover;
+        color: @text-1;
+    }
+}
+
+.cardSelected {
+    border-color: rgba(232, 255, 87, .4) !important;
+    background: @accent-dim !important;
+    color: @text-1 !important;
+}
+
+.cardMatched {
+    border-color: rgba(62, 207, 142, .2) !important;
+    background: rgba(62, 207, 142, .04) !important;
+    color: @text-3 !important;
+    cursor: default !important;
+    opacity: .55;
+}
+
+.cardWrong {
+    border-color: rgba(255, 91, 91, .4) !important;
+    background: @danger-bg !important;
+    color: @danger !important;
+    animation: shake .3s;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
