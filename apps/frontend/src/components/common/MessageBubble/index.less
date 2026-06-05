@@ -1,0 +1,131 @@
+@import '../../../styles/tokens.less';
+
+.wrap {
+    display: flex;
+    gap: 10px;
+    max-width: 88%;
+    align-self: flex-start;
+}
+
+.wrapUser {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.avatarAI {
+    background: rgba(167, 139, 250, .12);
+    color: #A78BFA;
+    border: 1px solid rgba(167, 139, 250, .2);
+}
+
+.avatarUser {
+    background: @accent-dim;
+    color: @accent;
+    border: 1px solid rgba(232, 255, 87, .2);
+}
+
+.bubble {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    position: relative;
+
+    &:hover .copyBtn {
+        opacity: 1;
+    }
+}
+
+.bubbleAI {
+    background: @bg1;
+    border: 1px solid @border;
+    color: @text-1;
+}
+
+.bubbleUser {
+    background: rgba(232, 255, 87, .06);
+    border: 1px solid rgba(232, 255, 87, .12);
+    color: @text-1;
+}
+
+.content {
+    :global(strong) {
+        color: @accent;
+        font-weight: 500;
+    }
+
+    :global(em) {
+        color: @text-2;
+        font-style: italic;
+    }
+
+    :global(del) {
+        color: @danger;
+        text-decoration: line-through;
+    }
+
+    :global(code) {
+        background: @bg3;
+        border-radius: 3px;
+        padding: 1px 5px;
+        font-size: 12px;
+        color: #A78BFA;
+        font-family: monospace;
+    }
+
+    :global(.cursor) {
+        display: inline-block;
+        animation: blink .8s infinite;
+        color: @accent;
+        font-size: 12px;
+        margin-left: 2px;
+    }
+}
+
+.copyBtn {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity .15s;
+    height: 20px;
+    padding: 0 7px;
+    background: @bg3;
+    border: 1px solid @border;
+    border-radius: 3px;
+    font-size: 10px;
+    color: @text-3;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: all .12s;
+
+    &:hover {
+        color: @text-1;
+        border-color: @border-hover;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}

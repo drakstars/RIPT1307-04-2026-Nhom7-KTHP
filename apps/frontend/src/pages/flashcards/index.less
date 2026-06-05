@@ -1,0 +1,221 @@
+@import '../../styles/tokens.less';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-6;
+}
+
+// ─── Header ──────────────────────────────────────────────
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heading {
+  font-size: @text-xl;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sub {
+  font-size: @text-sm;
+  color: @text-3;
+  margin-top: 4px;
+}
+
+.createBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: @accent;
+  color: @accent-fg;
+  border: none;
+  border-radius: @r;
+  font-size: @text-sm;
+  font-weight: 500;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    background: #d4eb4a;
+  }
+}
+
+// ─── Grid ────────────────────────────────────────────────
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: @sp-4;
+}
+
+// ─── Card ────────────────────────────────────────────────
+.card {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+  transition: @ease-med;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: @accent;
+    opacity: 0;
+    transition: @ease-fast;
+  }
+
+  &:hover {
+    border-color: @border-hover;
+    background: @bg2;
+    transform: translateY(-1px);
+
+    &::before { opacity: 1; }
+  }
+}
+
+.cardIcon {
+  width: 36px;
+  height: 36px;
+  background: @accent-dim;
+  border-radius: @r;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: @accent;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-size: @text-base;
+  font-weight: 500;
+  color: @text-1;
+  margin: 0;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardDesc {
+  font-size: @text-sm;
+  color: @text-3;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.cardBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  background: @bg3;
+  border: 1px solid @border;
+  border-radius: 20px;
+  font-size: @text-xs;
+  color: @text-2;
+}
+
+.cardActions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: @ease-fast;
+
+  .card:hover & { opacity: 1; }
+}
+
+.actionBtn {
+  width: 28px;
+  height: 28px;
+  background: @bg3;
+  border: 1px solid @border;
+  border-radius: @r-sm;
+  color: @text-2;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: @font-base;
+  transition: @ease-fast;
+
+  &:hover { color: @text-1; border-color: @border-hover; }
+  &.danger:hover { color: @danger; border-color: rgba(255,91,91,.3); background: @danger-bg; }
+}
+
+// ─── Empty state ─────────────────────────────────────────
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: @sp-4;
+  padding: @sp-8 0;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 40px;
+  opacity: 0.4;
+}
+
+.emptyTitle {
+  font-size: @text-md;
+  font-weight: 500;
+  color: @text-2;
+  margin: 0;
+}
+
+.emptySub {
+  font-size: @text-sm;
+  color: @text-3;
+  max-width: 280px;
+  line-height: 1.6;
+}
+
+// ─── Loading ─────────────────────────────────────────────
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid @bg3;
+  border-top-color: @accent;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

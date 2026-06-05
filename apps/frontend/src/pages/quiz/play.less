@@ -1,0 +1,376 @@
+@import '../../styles/tokens.less';
+
+.wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exitBtn {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: @text-2;
+    border: 1px solid transparent;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+.counter {
+    font-size: 12px;
+    color: @text-3;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer {
+    font-size: 12px;
+    color: @text-2;
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r-sm;
+    padding: 4px 10px;
+}
+
+.timerWarn {
+    color: @warn;
+    border-color: rgba(246, 166, 35, .3);
+    background: @warn-bg;
+}
+
+.progWrap {
+    height: 1.5px;
+    background: @bg3;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progFill {
+    height: 100%;
+    background: @accent;
+    border-radius: 1px;
+    transition: width .3s;
+}
+
+.qCard {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 24px;
+}
+
+.qTypeBadge {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: @text-3;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.qPrompt {
+    font-size: 17px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+// Multiple choice
+.choices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.choice,
+.choiceSelected,
+.choiceCorrect,
+.choiceWrong {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: @r;
+    border: 1px solid @border;
+    background: @bg0;
+    cursor: pointer;
+    transition: @ease-fast;
+    font-size: @text-sm;
+    color: @text-2;
+    font-family: @font-base;
+    width: 100%;
+    text-align: left;
+}
+
+.choice:hover {
+    border-color: @border-hover;
+    background: @bg1;
+    color: @text-1;
+}
+
+.choiceSelected {
+    border-color: rgba(232, 255, 87, .35);
+    background: @accent-dim;
+    color: @text-1;
+}
+
+.choiceCorrect {
+    border-color: rgba(62, 207, 142, .4);
+    background: @success-bg;
+    color: @success;
+    cursor: default;
+}
+
+.choiceWrong {
+    border-color: rgba(255, 91, 91, .4);
+    background: @danger-bg;
+    color: @danger;
+    cursor: default;
+}
+
+.choiceKey {
+    width: 22px;
+    height: 22px;
+    border-radius: @r-sm;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 500;
+    flex-shrink: 0;
+    opacity: .7;
+}
+
+// True / False
+.tfRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tf,
+.tfSelected,
+.tfCorrect,
+.tfWrong {
+    padding: 18px;
+    border-radius: @r;
+    border: 1px solid @border;
+    background: @bg0;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: @font-base;
+    color: @text-2;
+    transition: @ease-fast;
+    text-align: center;
+}
+
+.tf:hover {
+    border-color: @border-hover;
+    color: @text-1;
+}
+
+.tfSelected {
+    border-color: rgba(232, 255, 87, .35);
+    background: @accent-dim;
+    color: @accent;
+}
+
+.tfCorrect {
+    border-color: rgba(62, 207, 142, .4);
+    background: @success-bg;
+    color: @success;
+    cursor: default;
+}
+
+.tfWrong {
+    border-color: rgba(255, 91, 91, .4);
+    background: @danger-bg;
+    color: @danger;
+    cursor: default;
+}
+
+// Fill in blank
+.fillWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.fillPrompt {
+    font-size: 17px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1.6;
+}
+
+.fillBlank {
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 2px solid rgba(232, 255, 87, .4);
+    padding: 0 4px;
+    color: @accent;
+    font-weight: 500;
+}
+
+.fillInp {
+    background: @bg2;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 10px 14px;
+    color: @text-1;
+    font-size: @text-sm;
+    font-family: @font-base;
+    outline: none;
+    transition: @ease-fast;
+    width: 100%;
+
+    &:focus {
+        border-color: @border-focus;
+        box-shadow: 0 0 0 3px rgba(232, 255, 87, .06);
+    }
+
+    &::placeholder {
+        color: @text-3;
+    }
+}
+
+.fillResult {
+    padding: 10px 14px;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-weight: 500;
+}
+
+.fillCorrect {
+    background: @success-bg;
+    color: @success;
+}
+
+.fillWrong {
+    background: @danger-bg;
+    color: @danger;
+}
+
+// Explanation
+.explanation {
+    background: @bg2;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: @r;
+    padding: 14px 16px;
+    font-size: @text-sm;
+    color: @text-2;
+    line-height: 1.6;
+    margin-top: 12px;
+    animation: fadeIn .2s ease;
+}
+
+.explLabel {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: @text-3;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btnPrimary {
+    height: 32px;
+    padding: 0 16px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+}
+
+.btnSecondary {
+    height: 32px;
+    padding: 0 14px;
+    background: @bg2;
+    color: @text-1;
+    border: 1px solid @border;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.btnGhost {
+    height: 32px;
+    padding: 0 12px;
+    background: transparent;
+    color: @text-2;
+    border: 1px solid transparent;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

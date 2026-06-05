@@ -1,0 +1,229 @@
+@import '../../styles/tokens.less';
+
+.wrap {
+    max-width: 580px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: @sp-8;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.scoreCard {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 36px;
+    text-align: center;
+}
+
+.scoreCircle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid @accent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto 16px;
+}
+
+.scoreNum {
+    font-size: 28px;
+    font-weight: 500;
+    color: @accent;
+    line-height: 1;
+}
+
+.scoreDen {
+    font-size: 12px;
+    color: @text-3;
+}
+
+.scoreLabel {
+    font-size: 16px;
+    font-weight: 500;
+    color: @text-1;
+    margin-bottom: 4px;
+}
+
+.scoreSub {
+    font-size: 13px;
+    color: @text-2;
+}
+
+.statsRow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.stat {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 14px 16px;
+    text-align: center;
+}
+
+.statVal {
+    font-size: 22px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 10px;
+    color: @text-3;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-top: 5px;
+}
+
+.reviewSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.reviewLabel {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: @text-3;
+    font-weight: 500;
+}
+
+.reviewList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reviewItem {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reviewCorrect {
+    border-color: rgba(62, 207, 142, .15);
+}
+
+.reviewWrong {
+    border-color: rgba(255, 91, 91, .15);
+}
+
+.reviewPrompt {
+    font-size: @text-sm;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.reviewRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reviewRowLabel {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: @text-3;
+    min-width: 72px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: @r-sm;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.badgeSuccess {
+    background: @success-bg;
+    color: @success;
+}
+
+.badgeDanger {
+    background: @danger-bg;
+    color: @danger;
+}
+
+.explanation {
+    background: @bg2;
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: @r;
+    padding: 10px 14px;
+    font-size: @text-sm;
+    color: @text-2;
+    line-height: 1.6;
+}
+
+.explLabel {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: @text-3;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.resultActions {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding-top: @sp-3;
+}
+
+.btnPrimary {
+    height: 34px;
+    padding: 0 16px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+}
+
+.btnSecondary {
+    height: 34px;
+    padding: 0 14px;
+    background: @bg2;
+    color: @text-1;
+    border: 1px solid @border;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

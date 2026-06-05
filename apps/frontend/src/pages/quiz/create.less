@@ -1,0 +1,275 @@
+@import '../../styles/tokens.less';
+
+.page {
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-5;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: @text-sm;
+  color: @text-3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: @font-base;
+  padding: 0;
+  transition: @ease-fast;
+  &:hover { color: @text-2; }
+}
+
+.heading {
+  font-size: @text-xl;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.sub {
+  font-size: @text-sm;
+  color: @text-3;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+// ─── Section cards ──────────────────────────────────────
+.section {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-4;
+}
+
+.sectionTitle {
+  font-size: @text-sm;
+  font-weight: 500;
+  color: @text-2;
+  padding-bottom: @sp-3;
+  border-bottom: 1px solid @border;
+  margin-bottom: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: @text-sm;
+  color: @text-2;
+}
+
+.labelNote {
+  font-size: @text-xs;
+  color: @text-3;
+  margin-left: 6px;
+}
+
+.input,
+.select {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: 9px 12px;
+  color: @text-1;
+  font-size: @text-sm;
+  font-family: @font-base;
+  outline: none;
+  transition: @ease-fast;
+  width: 100%;
+  box-sizing: border-box;
+
+  &::placeholder { color: @text-3; }
+
+  &:focus {
+    border-color: @border-focus;
+    box-shadow: 0 0 0 3px rgba(232, 255, 87, .05);
+  }
+
+  option { background: @bg2; color: @text-1; }
+}
+
+.numInput {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: 9px 12px;
+  color: @text-1;
+  font-size: @text-sm;
+  font-family: @font-base;
+  outline: none;
+  transition: @ease-fast;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: @border-focus;
+    box-shadow: 0 0 0 3px rgba(232, 255, 87, .05);
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button { opacity: 0.6; }
+}
+
+// ─── Toggle row ──────────────────────────────────────────
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: @sp-4;
+}
+
+.toggleInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.toggleLabel {
+  font-size: @text-sm;
+  color: @text-2;
+  font-weight: 500;
+}
+
+.toggleDesc {
+  font-size: @text-xs;
+  color: @text-3;
+  line-height: 1.5;
+}
+
+.toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  input { opacity: 0; width: 0; height: 0; }
+
+  .track {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: @bg3;
+    border: 1px solid @border;
+    transition: @ease-fast;
+  }
+
+  .thumb {
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: @text-3;
+    transition: @ease-fast;
+  }
+
+  input:checked ~ .track { background: @accent; border-color: @accent; }
+  input:checked ~ .thumb { background: @accent-fg; transform: translateX(16px); }
+}
+
+// ─── Checkboxes ──────────────────────────────────────────
+.checkList {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    accent-color: @accent;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: @text-sm;
+    color: @text-2;
+    transition: @ease-fast;
+  }
+
+  &:hover span { color: @text-1; }
+}
+
+// ─── Error ───────────────────────────────────────────────
+.error {
+  font-size: @text-sm;
+  color: @danger;
+  padding: @sp-3 @sp-4;
+  background: @danger-bg;
+  border: 1px solid rgba(255,91,91,.2);
+  border-radius: @r;
+}
+
+// ─── Footer ──────────────────────────────────────────────
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: @sp-3;
+}
+
+.cancelBtn {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid @border;
+  border-radius: @r;
+  color: @text-2;
+  font-size: @text-sm;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+  &:hover { border-color: @border-hover; color: @text-1; }
+}
+
+.submitBtn {
+  padding: 8px 20px;
+  background: @accent;
+  border: none;
+  border-radius: @r;
+  color: @accent-fg;
+  font-size: @text-sm;
+  font-weight: 500;
+  font-family: @font-base;
+  cursor: pointer;
+  transition: @ease-fast;
+  &:hover { background: #d4eb4a; }
+  &:disabled { opacity: .5; cursor: not-allowed; }
+}
+
+// ─── Spinner ────────────────────────────────────────────
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid @bg3;
+  border-top-color: @accent;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
