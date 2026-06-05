@@ -1,0 +1,132 @@
+@import '../../../styles/tokens.less';
+
+.dropdown {
+  position: absolute;
+  bottom: 50px;
+  left: 8px;
+  width: 220px;
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.45);
+  z-index: 999;
+  overflow: hidden;
+  animation: slideUp 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header {
+  padding: @sp-3 @sp-4;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.userNameRow {
+  display: flex;
+  align-items: center;
+  gap: @sp-2;
+}
+
+.name {
+  font-size: @text-sm;
+  font-weight: 500;
+  color: @text-1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.badgeFree {
+  background: @bg3;
+  color: @text-2;
+  border: 1px solid @border;
+}
+
+.badgePro {
+  background: @accent-dim;
+  color: @accent;
+  border: 1px solid rgba(232, 255, 87, 0.2);
+}
+
+.email {
+  font-size: 11px;
+  color: @text-3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.divider {
+  height: 1px;
+  background: @border;
+}
+
+.menu {
+  padding: 4px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: @sp-3;
+  width: 100%;
+  padding: 8px @sp-3;
+  background: transparent;
+  border: none;
+  border-radius: @r;
+  color: @text-2;
+  font-size: @text-sm;
+  font-family: @font-base;
+  text-align: left;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    background: @bg2;
+    color: @text-1;
+  }
+}
+
+.icon {
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.menuDivider {
+  height: 1px;
+  background: @border;
+  margin: 4px 0;
+}
+
+.signOut {
+  &:hover {
+    background: @danger-bg;
+    color: @danger;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

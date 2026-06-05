@@ -1,0 +1,44 @@
+@import '../../../styles/tokens.less';
+
+.header { margin-bottom: @sp-6; }
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: @sp-2;
+  font-size: @text-xs;
+  color: @text-3;
+  margin-bottom: 10px;
+}
+
+.sep { color: @text-3; opacity: .5; }
+.link { cursor: pointer; &:hover { color: @text-2; } }
+.current { color: @text-2; }
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: @sp-4;
+}
+
+.title {
+  font-size: @text-xl;
+  font-weight: 500;
+  color: @text-1;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+
+.desc {
+  font-size: @text-sm;
+  color: @text-2;
+  margin-top: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: @sp-2;
+  align-items: center;
+  flex-shrink: 0;
+}
