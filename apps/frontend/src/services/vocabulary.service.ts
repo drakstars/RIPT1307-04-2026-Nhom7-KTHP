@@ -15,8 +15,20 @@ export type VocabularyPayload = {
 };
 
 export const vocabularyService = {
-  getAll() {
-    return api.get('/vocabularies');
+  getAll(params?: { search?: string; topic?: string; level?: string }) {
+    return api.get('/vocabularies', { params });
+  },
+
+  getRandom() {
+    return api.get('/vocabularies/random');
+  },
+
+  getRecent(limit?: number) {
+    return api.get('/vocabularies/recent', { params: { limit } });
+  },
+
+  getStats() {
+    return api.get('/vocabularies/stats');
   },
 
   create(payload: VocabularyPayload) {

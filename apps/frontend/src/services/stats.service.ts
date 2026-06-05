@@ -18,4 +18,7 @@ export const statsService = {
 
     getStreak: (): Promise<StreakData> =>
         api.get('/stats/streak').then(r => r.data),
+
+    recordActivity: (type: 'card' | 'quiz', count: number): Promise<any> =>
+        api.post('/stats/record', { type, count }).then(r => r.data),
 };
