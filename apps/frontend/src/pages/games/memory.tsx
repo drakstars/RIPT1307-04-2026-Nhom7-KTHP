@@ -6,13 +6,17 @@ import { flashcardService } from '@/services/flashcards.service';
 import { buildMemoryCards, shuffle } from '@/utils/game.utils';
 import { useMemoryGame } from '@/hooks/useMemoryGame';
 import GameResult from '@/components/common/GameResult';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './memory.less';
+
 const MemoryGamePage: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const setId = params.get('set');
     const startedAt = useRef(Date.now());
+    const { t } = useTranslation();
+
     const { data: set, isLoading } = useQuery({
         queryKey: ['game-set', setId],
         queryFn: async () => {
@@ -22,6 +26,7 @@ const MemoryGamePage: React.FC = () => {
             return flashcardService.getSet(target.id);
         },
     });
+
     const initialCards = useMemo(() => {
         if (!set?.flashcards) return [];
         return buildMemoryCards(
@@ -29,8 +34,20 @@ const MemoryGamePage: React.FC = () => {
             8,
         );
     }, [set]);
+
     const { cards, flips, pairs, totalPairs, gameOver, flip, reset } = useMemoryGame(initialCards);
+
+    React.useEffect(() => {
+        if (gameOver && initialCards.length > 0) {
+            const cardIds = Array.from(new Set(initialCards.map(c => c.pairId)));
+            cardIds.forEach(cardId => {
+                flashcardService.recordStudy(cardId, 'KNOWN').catch(e => console.error('Error recording study:', e));
+            });
+        }
+    }, [gameOver, initialCards]);
+
     if (isLoading) return <div className={styles.centered}><Spin /></div>;
+
     if (gameOver && pairs >= totalPairs) {
         return (
             <div className={styles.pg}>
@@ -48,15 +65,16 @@ const MemoryGamePage: React.FC = () => {
             </div>
         );
     }
+
     return (
         <div className={styles.pg}>
             <div className={styles.topBar}>
-                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← Exit</button>
+                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← {t('exitBtnText')}</button>
                 <div className={styles.stats}>
-                    <div className={styles.statPill}>Pairs <span className={styles.statVal}>{pairs}/{totalPairs}</span></div>
-                    <div className={styles.statPill}>Flips <span className={styles.statVal}>{flips}</span></div>
+                    <div className={styles.statPill}>{t('pairsLabel')} <span className={styles.statVal}>{pairs}/{totalPairs}</span></div>
+                    <div className={styles.statPill}>{t('flipsLabel')} <span className={styles.statVal}>{flips}</span></div>
                 </div>
-                <button className={styles.restartBtn} onClick={() => { reset(shuffle(initialCards)); startedAt.current = Date.now(); }}>Restart</button>
+                <button className={styles.restartBtn} onClick={() => { reset(shuffle(initialCards)); startedAt.current = Date.now(); }}>{t('restartBtnText')}</button>
             </div>
             <div className={styles.grid}>
                 {cards.map(card => (
@@ -77,4 +95,5 @@ const MemoryGamePage: React.FC = () => {
         </div>
     );
 };
+
 export default MemoryGamePage;

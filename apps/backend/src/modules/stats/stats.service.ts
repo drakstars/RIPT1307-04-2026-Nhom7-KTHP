@@ -301,8 +301,8 @@ export class StatsService {
             let tempStreak = 1;
             best = 1;
             for (let i = 1; i < sortedDates.length; i++) {
-                const prevDate = new Date(sortedDates[i - 1]);
-                const currDate = new Date(sortedDates[i]);
+                const prevDate = new Date(sortedDates[i - 1] as string);
+                const currDate = new Date(sortedDates[i] as string);
                 const diffTime = Math.abs(currDate.getTime() - prevDate.getTime());
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
                 

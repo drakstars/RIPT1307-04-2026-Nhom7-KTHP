@@ -6,6 +6,7 @@ import { flashcardService } from '@/services/flashcards.service';
 import { buildDragQuestions } from '@/utils/game.utils';
 import { useDragGame } from '@/hooks/useDragGame';
 import GameResult from '@/components/common/GameResult';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './drag.less';
 
 const DragGamePage: React.FC = () => {
@@ -14,6 +15,7 @@ const DragGamePage: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const setId = params.get('set');
     const startedAt = useRef(Date.now());
+    const { t } = useTranslation();
 
     const { data: set, isLoading } = useQuery({
         queryKey: ['game-set-drag', setId],
@@ -38,6 +40,14 @@ const DragGamePage: React.FC = () => {
         checked, isCorrect, gameOver, isLast, total,
         fill, clear, check, next, reset,
     } = useDragGame(questions);
+
+    React.useEffect(() => {
+        if (gameOver && questions.length > 0) {
+            questions.forEach(q => {
+                flashcardService.recordStudy(q.id, 'KNOWN').catch(e => console.error('Error recording study:', e));
+            });
+        }
+    }, [gameOver, questions]);
 
     if (isLoading) return <div className={styles.centered}><Spin /></div>;
 
@@ -67,12 +77,12 @@ const DragGamePage: React.FC = () => {
     return (
         <div className={styles.pg}>
             <div className={styles.topBar}>
-                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← Exit</button>
+                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← {t('exitBtnText')}</button>
                 <div className={styles.stats}>
                     <div className={styles.statPill}>Q <span className={styles.statVal}>{currentIdx + 1}/{total}</span></div>
-                    <div className={styles.statPill}>Score <span className={styles.statVal}>{score}</span></div>
+                    <div className={styles.statPill}>{t('scoreLabelText').charAt(0).toUpperCase() + t('scoreLabelText').slice(1)} <span className={styles.statVal}>{score}</span></div>
                 </div>
-                <button className={styles.restartBtn} onClick={() => { reset(); startedAt.current = Date.now(); }}>Restart</button>
+                <button className={styles.restartBtn} onClick={() => { reset(); startedAt.current = Date.now(); }}>{t('restartBtnText')}</button>
             </div>
 
             <div className={styles.progWrap}>
@@ -81,7 +91,7 @@ const DragGamePage: React.FC = () => {
 
             {/* Question */}
             <div className={styles.questionCard}>
-                <div className={styles.qLabel}>Fill in the blank</div>
+                <div className={styles.qLabel}>{t('fillInBlankLabel')}</div>
                 <div className={styles.sentence}>
                     {before}
                     <span
@@ -118,8 +128,8 @@ const DragGamePage: React.FC = () => {
             {checked && (
                 <div className={`${styles.feedback} ${isCorrect ? styles.feedbackCorrect : styles.feedbackWrong}`}>
                     {isCorrect
-                        ? `✓ Correct! "${currentQ.answer}" is right.`
-                        : `✗ The answer is "${currentQ.answer}".`
+                        ? t('dragCorrectFeedback').replace('{ans}', currentQ.answer)
+                        : t('dragWrongFeedback').replace('{ans}', currentQ.answer)
                     }
                 </div>
             )}
@@ -128,12 +138,12 @@ const DragGamePage: React.FC = () => {
             <div className={styles.actions}>
                 {!checked ? (
                     <>
-                        <button className={styles.btnSecondary} onClick={clear} disabled={!filledAnswer}>Clear</button>
-                        <button className={styles.btnPrimary} onClick={check} disabled={!filledAnswer}>Check →</button>
+                        <button className={styles.btnSecondary} onClick={clear} disabled={!filledAnswer}>{t('clearBtnText')}</button>
+                        <button className={styles.btnPrimary} onClick={check} disabled={!filledAnswer}>{t('checkBtnText')}</button>
                     </>
                 ) : (
                     <button className={styles.btnPrimary} onClick={next}>
-                        {isLast ? 'See results →' : 'Next →'}
+                        {isLast ? t('seeResultsBtnText') : t('nextBtnText')}
                     </button>
                 )}
             </div>
