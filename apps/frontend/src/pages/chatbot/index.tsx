@@ -6,6 +6,7 @@ import { useChatStore } from '@/stores/chat.store';
 import { useAuthStore } from '@/stores/auth.store';
 import MessageBubble from '@/components/common/MessageBubble';
 import { CHAT_MODES, type ChatMode } from '@/types/chat.types';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './index.less';
 
 const ChatbotPage: React.FC = () => {
@@ -14,6 +15,7 @@ const ChatbotPage: React.FC = () => {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const [input, setInput] = useState('');
     const { accessToken } = useAuthStore();
+    const { t, language } = useTranslation();
 
     const {
         conversations, messages, streamingContent, isStreaming,
@@ -113,6 +115,27 @@ const ChatbotPage: React.FC = () => {
         }
     };
 
+    const getModeLabel = (mode: ChatMode) => {
+        if (mode === 'GRAMMAR_CHECK') return t('grammarCheckLabel');
+        if (mode === 'WORD_EXPLAINER') return t('wordExplainerLabel');
+        if (mode === 'FREE_CHAT') return t('freeChatLabel');
+        return t('sentenceFixerLabel');
+    };
+
+    const getModeEmptySub = (mode: ChatMode) => {
+        if (mode === 'GRAMMAR_CHECK') return t('grammarCheckEmpty');
+        if (mode === 'WORD_EXPLAINER') return t('wordExplainerEmpty');
+        if (mode === 'FREE_CHAT') return t('freeChatEmpty');
+        return t('sentenceFixerEmpty');
+    };
+
+    const getModePlaceholder = (mode: ChatMode) => {
+        if (mode === 'GRAMMAR_CHECK') return language === 'vi' ? 'Dán một câu để kiểm tra ngữ pháp…' : 'Paste a sentence to check grammar…';
+        if (mode === 'WORD_EXPLAINER') return language === 'vi' ? 'Nhập bất kỳ từ hoặc cụm từ nào…' : 'Type any word or phrase…';
+        if (mode === 'FREE_CHAT') return language === 'vi' ? 'Trò chuyện bằng tiếng Anh tự do…' : 'Chat in English freely…';
+        return language === 'vi' ? 'Dán một câu chưa tự nhiên để cải thiện…' : 'Paste an awkward sentence to improve…';
+    };
+
     const modeConfig = CHAT_MODES[activeMode];
     const showEmpty = messages.length === 0 && !streamingContent;
 
@@ -121,8 +144,8 @@ const ChatbotPage: React.FC = () => {
             {/* Sidebar */}
             <aside className={styles.sidebar}>
                 <div className={styles.sbHead}>
-                    <div className={styles.sbTitle}>AI Tutor</div>
-                    <div className={styles.sbSub}>English assistant</div>
+                    <div className={styles.sbTitle}>{t('aiTutorTitle')}</div>
+                    <div className={styles.sbSub}>{t('aiTutorSub')}</div>
                 </div>
 
                 {/* Modes */}
@@ -136,7 +159,7 @@ const ChatbotPage: React.FC = () => {
                                 onClick={() => handleNewChat(mode)}
                             >
                                 <span className={styles.modeIcon}>{m.icon}</span>
-                                <span className={styles.modeLabel}>{m.label}</span>
+                                <span className={styles.modeLabel}>{getModeLabel(mode)}</span>
                             </button>
                         );
                     })}
@@ -145,7 +168,7 @@ const ChatbotPage: React.FC = () => {
                 {/* History */}
                 {(convList ?? []).length > 0 && (
                     <>
-                        <div className={styles.histLabel}>Recent</div>
+                        <div className={styles.histLabel}>{t('recentChatsLabel')}</div>
                         <div className={styles.histList}>
                             {(convList ?? []).map(conv => (
                                 <div
@@ -155,15 +178,15 @@ const ChatbotPage: React.FC = () => {
                                 >
                                     <span className={styles.histIcon}>{CHAT_MODES[conv.mode as ChatMode]?.icon}</span>
                                     <span className={styles.histTitle}>
-                                        {conv.title ?? `${CHAT_MODES[conv.mode as ChatMode]?.label}`}
+                                        {conv.title ?? getModeLabel(conv.mode as ChatMode)}
                                     </span>
                                     <Popconfirm
-                                        title="Delete conversation?"
+                                        title={t('deleteChatConfirm')}
                                         onConfirm={e => {
                                             e?.stopPropagation();
                                             deleteConvMutation.mutate(conv.id);
                                         }}
-                                        okText="Delete" cancelText="Cancel"
+                                        okText={t('deleteBtn')} cancelText={t('cancelBtn')}
                                     >
                                         <button
                                             className={styles.histDelete}
@@ -182,12 +205,12 @@ const ChatbotPage: React.FC = () => {
             {/* Main */}
             <div className={styles.main}>
                 <div className={styles.mainHead}>
-                    <span className={styles.modeBadge}>{modeConfig.icon} {modeConfig.label}</span>
+                    <span className={styles.modeBadge}>{modeConfig.icon} {getModeLabel(activeMode)}</span>
                     <button
                         className={styles.clearBtn}
                         onClick={() => handleNewChat(activeMode)}
                     >
-                        New chat
+                        {t('newChatBtn')}
                     </button>
                 </div>
 
@@ -196,12 +219,9 @@ const ChatbotPage: React.FC = () => {
                     {showEmpty && (
                         <div className={styles.emptyState}>
                             <div className={styles.emptyIcon}>{modeConfig.icon}</div>
-                            <div className={styles.emptyTitle}>{modeConfig.label}</div>
+                            <div className={styles.emptyTitle}>{getModeLabel(activeMode)}</div>
                             <div className={styles.emptySub}>
-                                {activeMode === 'GRAMMAR_CHECK' && 'Paste any sentence and I\'ll check the grammar.'}
-                                {activeMode === 'WORD_EXPLAINER' && 'Type any word and I\'ll explain it in detail.'}
-                                {activeMode === 'FREE_CHAT' && 'Let\'s have a conversation in English.'}
-                                {activeMode === 'SENTENCE_FIXER' && 'Paste awkward sentences and I\'ll rewrite them naturally.'}
+                                {getModeEmptySub(activeMode)}
                             </div>
                             {/* Suggestions */}
                             <div className={styles.emptySugs}>
@@ -275,7 +295,7 @@ const ChatbotPage: React.FC = () => {
                     <textarea
                         ref={inputRef}
                         className={styles.inp}
-                        placeholder={modeConfig.placeholder}
+                        placeholder={getModePlaceholder(activeMode)}
                         value={input}
                         rows={1}
                         onChange={e => {
