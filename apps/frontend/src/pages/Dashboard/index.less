@@ -1,0 +1,1469 @@
+@import '../../styles/tokens.less';
+
+.pg {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-6;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.greeting {
+  font-size: @text-xl;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  color: @text-1;
+}
+
+.greetingSub {
+  font-size: @text-sm;
+  color: @text-2;
+  margin-top: 4px;
+}
+
+.topActions {
+  display: flex;
+  gap: @sp-2;
+}
+
+.btnPrimary {
+  height: 36px;
+  padding: 0 @sp-4;
+  background: @accent;
+  border: none;
+  border-radius: @r;
+  font-size: 13px;
+  font-weight: 500;
+  color: @accent-fg;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btnSecondary {
+  height: 36px;
+  padding: 0 @sp-4;
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  font-size: 13px;
+  font-weight: 500;
+  color: @text-1;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    border-color: @border-hover;
+    background: @bg3;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* KPI cards */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: @sp-3;
+}
+
+.kpi {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-4 @sp-5;
+  transition: @ease-med;
+
+  &:hover {
+    border-color: @border-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.kpiLabel {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: @text-3;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.kpiVal {
+  font-size: 28px;
+  font-weight: 500;
+  color: @text-1;
+  line-height: 1;
+
+  &.green {
+    color: @success;
+  }
+
+  &.accent {
+    color: @accent;
+  }
+
+  &.accentBlue {
+    color: #39A8FF;
+  }
+
+  &.warn {
+    color: @warn;
+  }
+}
+
+.kpiDelta {
+  font-size: 11px;
+  color: @text-3;
+  margin-top: 6px;
+
+  &.up {
+    color: @success;
+  }
+}
+
+/* Two column layout */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: @sp-5;
+}
+
+.card {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-5;
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: @sp-4;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: @text-1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: @r-sm;
+  font-size: 11px;
+  font-weight: 500;
+  background: @bg3;
+  color: @text-2;
+  border: 1px solid @border;
+}
+
+.muted {
+  font-size: 11px;
+  color: @text-3;
+}
+
+.link {
+  font-size: 12px;
+  color: @text-2;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    color: @accent;
+  }
+}
+
+.skelSmall {
+  height: 120px;
+  background: @bg2;
+  border-radius: @r;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Progress List */
+.progressList {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-4;
+}
+
+.progressRow {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: @sp-3 @sp-4;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    border-color: @border-hover;
+    background: @bg3;
+  }
+}
+
+.progressTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progressName {
+  font-size: 13px;
+  font-weight: 500;
+  color: @text-1;
+}
+
+.progressPct {
+  font-size: 11px;
+  color: @text-2;
+}
+
+.barWrap {
+  height: 4px;
+  background: @bg0;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.barKnown {
+  height: 100%;
+  background: @success;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 2px;
+}
+
+.barReview {
+  height: 100%;
+  background: @warn;
+  position: absolute;
+  top: 0;
+  border-radius: 0 2px 2px 0;
+}
+
+.progressFoot {
+  display: flex;
+  gap: @sp-3;
+}
+
+.progressStat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: @text-2;
+}
+
+.dotGreen {
+  width: 5px;
+  height: 5px;
+  background: @success;
+  border-radius: 50%;
+}
+
+.dotWarn {
+  width: 5px;
+  height: 5px;
+  background: @warn;
+  border-radius: 50%;
+}
+
+.dotMuted {
+  width: 5px;
+  height: 5px;
+  background: @text-3;
+  border-radius: 50%;
+}
+
+/* Quiz History */
+.histCard {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  overflow: hidden;
+}
+
+.histRow {
+  display: flex;
+  align-items: center;
+  gap: @sp-4;
+  padding: @sp-3 @sp-5;
+  border-bottom: 1px solid @border;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: @bg2;
+  }
+}
+
+.histScore {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.histGreen {
+  background: @success-bg;
+  color: @success;
+  border: 1px solid rgba(62, 207, 142, 0.2);
+}
+
+.histWarn {
+  background: @warn-bg;
+  color: @warn;
+  border: 1px solid rgba(246, 166, 35, 0.2);
+}
+
+.histRed {
+  background: @danger-bg;
+  color: @danger;
+  border: 1px solid rgba(255, 91, 91, 0.2);
+}
+
+.histInfo {
+  flex: 1;
+}
+
+.histName {
+  font-size: 13px;
+  font-weight: 500;
+  color: @text-1;
+}
+
+.histMeta {
+  font-size: 11px;
+  color: @text-2;
+  margin-top: 2px;
+}
+
+.histTime {
+  font-size: 11px;
+  color: @text-3;
+}
+
+.emptyHist {
+  padding: @sp-6;
+  text-align: center;
+  font-size: 13px;
+  color: @text-3;
+
+  span {
+    color: @accent;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ─── VOCABULARY LEARNING HUB STYLES ────────────────────── */
+.vocabSection {
+  background: @bg1;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-5;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-4;
+}
+
+.vocabSectionHeader {
+  border-left: 3px solid @accent;
+  padding-left: @sp-3;
+}
+
+.vocabSectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: @text-1;
+  margin: 0;
+}
+
+.vocabSectionSub {
+  font-size: 12px;
+  color: @text-2;
+  margin: 2px 0 0 0;
+}
+
+.vocabGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: @sp-4;
+}
+
+.vocabColLeft {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-4;
+}
+
+.vocabColRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.vocabSubCard {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-4;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+}
+
+.vocabSubCardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vocabSubCardTitle {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: @text-2;
+}
+
+.refreshBtn {
+  font-size: 11px;
+  background: transparent;
+  border: none;
+  color: @accent;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: @r-sm;
+  transition: @ease-fast;
+
+  &:hover {
+    background: @accent-dim;
+  }
+}
+
+.dailyWordContainer {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+  padding: @sp-2 0;
+}
+
+.dailyWordHeader {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: @sp-2;
+}
+
+.dailyWordText {
+  font-size: 20px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.dailyWordType {
+  font-size: 11px;
+  font-style: italic;
+  color: @text-3;
+  background: @bg3;
+  padding: 1px 6px;
+  border-radius: @r-sm;
+}
+
+.dailyWordIpa {
+  font-size: 13px;
+  color: @text-2;
+  font-family: sans-serif;
+}
+
+.audioBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: @accent-dim;
+  border: 1px solid @accent;
+  color: @accent;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: auto;
+  transition: @ease-fast;
+
+  &:hover {
+    background: @accent;
+    color: @accent-fg;
+  }
+}
+
+.dailyWordDetail {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: @bg0;
+  padding: @sp-3;
+  border-radius: @r;
+  border: 1px solid @border;
+}
+
+.dailyWordMeaning {
+  font-size: 13px;
+  color: @text-1;
+  margin: 0;
+}
+
+.dailyWordExample {
+  font-size: 12px;
+  color: @text-2;
+  margin: 0;
+  border-top: 1px solid @border;
+  padding-top: 6px;
+}
+
+.dailyWordTopicBadge {
+  align-self: flex-start;
+  font-size: 10px;
+  background: @accent-dim;
+  color: @accent;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.vocabSkeleton {
+  height: 120px;
+  background: @bg3;
+  border-radius: @r;
+  animation: pulse 1.5s infinite;
+}
+
+/* Quick Search */
+.searchBoxWrap {
+  position: relative;
+  width: 100%;
+}
+
+.searchBoxInp {
+  width: 100%;
+  height: 38px;
+  background: @bg0;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: 0 36px 0 @sp-3;
+  color: @text-1;
+  font-size: 13px;
+  transition: @ease-fast;
+
+  &:focus {
+    border-color: @border-focus;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(232, 255, 87, 0.15);
+  }
+}
+
+.searchBoxClear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: @text-3;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px;
+
+  &:hover {
+    color: @text-2;
+  }
+}
+
+.searchResultsArea {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.searchStateText {
+  color: @text-3;
+  font-size: 12px;
+  text-align: center;
+  padding: @sp-2 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: @sp-2;
+}
+
+.dictionaryLink {
+  color: @accent;
+  text-decoration: underline;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  margin-top: 4px;
+
+  &:hover {
+    color: @accent-hover;
+  }
+}
+
+.searchResultsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.resultRow {
+  background: @bg0;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: @sp-3;
+}
+
+.resultRowHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.resultWord {
+  font-size: 14px;
+  font-weight: 600;
+  color: @text-1;
+}
+
+.resultPos {
+  font-size: 10px;
+  font-style: italic;
+  color: @text-3;
+}
+
+.resultIpa {
+  font-size: 11px;
+  color: @text-2;
+}
+
+.resultAudioBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  color: @text-3;
+  padding: 0;
+
+  &:hover {
+    color: @accent;
+  }
+}
+
+.resultMeaning {
+  font-size: 12px;
+  color: @text-1;
+  margin: 0;
+}
+
+.resultExample {
+  font-size: 11px;
+  color: @text-3;
+  margin: 4px 0 0 0;
+}
+
+/* Topics Grid */
+.topicsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+  max-height: 450px;
+  overflow-y: auto;
+  padding-right: 4px;
+
+  /* Scrollbar styling */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.topicCard {
+  border: 1px solid;
+  border-radius: @r-lg;
+  padding: @sp-4;
+  cursor: pointer;
+  transition: @ease-med;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.ieltsTheme {
+  background: rgba(57, 168, 255, 0.04);
+  border-color: rgba(57, 168, 255, 0.12);
+  &:hover { border-color: rgba(57, 168, 255, 0.35); }
+  .topicBadge { background: rgba(57, 168, 255, 0.15); color: #39A8FF; }
+}
+
+.toeicTheme {
+  background: rgba(62, 207, 142, 0.04);
+  border-color: rgba(62, 207, 142, 0.12);
+  &:hover { border-color: rgba(62, 207, 142, 0.35); }
+  .topicBadge { background: rgba(62, 207, 142, 0.15); color: @success; }
+}
+
+.toeflTheme {
+  background: rgba(246, 166, 35, 0.04);
+  border-color: rgba(246, 166, 35, 0.12);
+  &:hover { border-color: rgba(246, 166, 35, 0.35); }
+  .topicBadge { background: rgba(246, 166, 35, 0.15); color: @warn; }
+}
+
+.customTheme {
+  background: rgba(139, 92, 246, 0.04);
+  border-color: rgba(139, 92, 246, 0.12);
+  &:hover { border-color: rgba(139, 92, 246, 0.35); }
+  .topicBadge { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+}
+
+
+.topicCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topicBadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+
+.topicCount {
+  font-size: 11px;
+  color: @text-2;
+  font-weight: 500;
+}
+
+.topicTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.topicDesc {
+  font-size: 11px;
+  color: @text-2;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.topicActionFooter {
+  font-size: 11px;
+  color: @text-3;
+  align-self: flex-start;
+  margin-top: 4px;
+  font-weight: 500;
+  transition: @ease-fast;
+
+  .topicCard:hover & {
+    color: @text-1;
+  }
+}
+
+/* ─── INTERACTIVE STUDY MODAL STYLES ────────────────────── */
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+}
+
+.modalHeader {
+  padding: @sp-4 @sp-5;
+  border-bottom: 1px solid @border;
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+}
+
+.modalTitleBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalMainTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.modalSubTitle {
+  font-size: 11px;
+  color: @text-3;
+  margin: 2px 0 0 0;
+}
+
+.modalTabs {
+  display: flex;
+  gap: @sp-1;
+  background: @bg0;
+  padding: 3px;
+  border-radius: @r;
+  border: 1px solid @border;
+  align-self: flex-start;
+}
+
+.modalTabBtn {
+  background: transparent;
+  border: none;
+  color: @text-2;
+  padding: 5px @sp-3;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: @r-sm;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    color: @text-1;
+  }
+
+  &.activeTab {
+    background: @bg3;
+    color: @text-1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.modalBodyContent {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: @sp-4 @sp-5;
+}
+
+.modalSpinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* TAB 1: LIST VIEW */
+.tabContentList {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-3;
+  height: 100%;
+  overflow: hidden;
+}
+
+.listToolbar {
+  position: relative;
+  width: 100%;
+}
+
+.listSearchInp {
+  width: 100%;
+  height: 34px;
+  background: @bg0;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: 0 32px 0 @sp-3;
+  color: @text-1;
+  font-size: 12px;
+  transition: @ease-fast;
+
+  &:focus {
+    border-color: @border-focus;
+    outline: none;
+  }
+}
+
+.listSearchClear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: @text-3;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.wordRowsList {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-2;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.wordItemRow {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r;
+  padding: @sp-3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wordItemMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wordItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wordIndex {
+  font-size: 10px;
+  color: @text-3;
+  font-weight: 600;
+}
+
+.wordText {
+  font-size: 14px;
+  color: @text-1;
+}
+
+.wordPos {
+  font-size: 10px;
+  font-style: italic;
+  color: @text-3;
+}
+
+.wordIpa {
+  font-size: 11px;
+  color: @text-2;
+}
+
+.speakerBtnSmall {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: @text-3;
+  padding: 2px;
+
+  &:hover {
+    color: @accent;
+  }
+}
+
+.wordMeaning {
+  font-size: 13px;
+  color: @accent;
+  font-weight: 500;
+}
+
+.wordExample {
+  font-size: 11px;
+  color: @text-2;
+  margin: 0;
+  padding-left: 24px;
+}
+
+.emptyListText {
+  font-size: 12px;
+  color: @text-3;
+  text-align: center;
+  padding: @sp-5;
+}
+
+/* TAB 2: FLASHCARD VIEW */
+.tabContentFlashcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: @sp-4;
+}
+
+.flashcardContainer {
+  width: 100%;
+  max-width: 420px;
+}
+
+.flashcardWrap {
+  perspective: 1000px;
+  width: 100%;
+  height: 240px;
+  cursor: pointer;
+}
+
+.flashcardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+
+  &.flipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.flashcardFront, .flashcardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: @r-xl;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: @sp-5;
+  text-align: center;
+}
+
+.flashcardFront {
+  background: @bg2;
+  color: @text-1;
+}
+
+.flashcardBack {
+  transform: rotateY(180deg);
+  background: @bg3;
+  color: @text-1;
+  border-color: rgba(232, 255, 87, 0.2);
+}
+
+.fcTypeBadge {
+  font-size: 10px;
+  color: @text-3;
+  background: @bg0;
+  padding: 2px 8px;
+  border-radius: @r-sm;
+  margin-bottom: @sp-2;
+  text-transform: uppercase;
+}
+
+.fcWord {
+  font-size: 28px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.fcIpa {
+  font-size: 14px;
+  color: @text-2;
+  margin-top: 4px;
+}
+
+.fcAudioBtn {
+  background: @accent-dim;
+  border: 1px solid @accent;
+  color: @accent;
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: @sp-3;
+  transition: @ease-fast;
+
+  &:hover {
+    background: @accent;
+    color: @accent-fg;
+  }
+}
+
+.fcHint {
+  font-size: 10px;
+  color: @text-3;
+  margin-top: @sp-3;
+}
+
+.fcBackTitle {
+  font-size: 10px;
+  color: @text-3;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: @sp-2;
+}
+
+.fcMeaning {
+  font-size: 20px;
+  font-weight: 600;
+  color: @accent;
+  margin: 0;
+}
+
+.fcExample {
+  font-size: 12px;
+  color: @text-2;
+  margin-top: @sp-3;
+  background: @bg0;
+  padding: 8px 12px;
+  border-radius: @r;
+  border: 1px solid @border;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+.flashcardNav {
+  display: flex;
+  align-items: center;
+  gap: @sp-4;
+  margin-top: @sp-2;
+}
+
+.navBtn {
+  background: @bg3;
+  border: 1px solid @border;
+  color: @text-1;
+  font-size: 12px;
+  padding: 6px @sp-3;
+  border-radius: @r;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    border-color: @border-hover;
+    background: @bg2;
+  }
+}
+
+.navProgress {
+  font-size: 12px;
+  color: @text-2;
+  font-weight: 500;
+}
+
+/* TAB 3: QUIZ VIEW */
+.tabContentQuiz {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizError {
+  font-size: 13px;
+  color: @danger;
+}
+
+.quizFinishCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: @sp-3;
+  text-align: center;
+  padding: @sp-5;
+}
+
+.quizScoreCircle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: @success-bg;
+  border: 2px solid @success;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.scoreNum {
+  font-size: 32px;
+  color: @success;
+}
+
+.scoreDenom {
+  font-size: 14px;
+  color: @text-2;
+  margin-top: 10px;
+}
+
+.quizFinishTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 0;
+}
+
+.quizFinishText {
+  font-size: 13px;
+  color: @text-2;
+  margin: 0;
+}
+
+.retryBtn {
+  background: @accent;
+  color: @accent-fg;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px @sp-4;
+  border-radius: @r;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.quizPlayCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  gap: @sp-4;
+}
+
+.quizPlayHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: @text-2;
+  font-weight: 600;
+}
+
+.quizQuestionBox {
+  background: @bg2;
+  border: 1px solid @border;
+  border-radius: @r-lg;
+  padding: @sp-4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.quizQuestionLabel {
+  font-size: 11px;
+  color: @text-3;
+  text-transform: uppercase;
+}
+
+.quizQuestionWord {
+  font-size: 26px;
+  font-weight: 600;
+  color: @text-1;
+  margin: 8px 0;
+}
+
+.quizWordMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.quizWordPos {
+  font-size: 11px;
+  font-style: italic;
+  color: @text-3;
+}
+
+.quizWordIpa {
+  font-size: 12px;
+  color: @text-2;
+}
+
+.quizOptionsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: @sp-3;
+}
+
+.quizOptionBtn {
+  height: 42px;
+  border-radius: @r;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: @ease-fast;
+  padding: 0 @sp-3;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.optActive {
+  background: @bg3;
+  border: 1px solid @border;
+  color: @text-1;
+
+  &:hover {
+    border-color: @accent;
+    background: @bg2;
+  }
+}
+
+.optCorrect {
+  background: @success-bg;
+  border: 1.5px solid @success;
+  color: @success;
+}
+
+.optWrong {
+  background: @danger-bg;
+  border: 1.5px solid @danger;
+  color: @danger;
+}
+
+.optDisabled {
+  background: @bg0;
+  border: 1px solid @border;
+  color: @text-3;
+  cursor: not-allowed;
+}
+
+.quizFeedbackArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: @sp-2;
+  margin-top: @sp-2;
+}
+
+.quizAnswerFeedback {
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+}
+
+.fbCorrect {
+  color: @success;
+}
+
+.fbWrong {
+  color: @danger;
+}
+
+.quizNextBtn {
+  background: @accent;
+  color: @accent-fg;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px @sp-4;
+  border-radius: @r;
+  cursor: pointer;
+  transition: @ease-fast;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .kpis {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: @sp-3;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .vocabGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .kpis {
+    grid-template-columns: 1fr;
+  }
+}

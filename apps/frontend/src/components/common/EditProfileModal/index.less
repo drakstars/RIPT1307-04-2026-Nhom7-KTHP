@@ -1,0 +1,75 @@
+@import '../../../styles/tokens.less';
+
+.modal {
+  :global {
+    .ant-modal-content {
+      background: var(--bg1) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-1) !important;
+    }
+    .ant-modal-header {
+      background: var(--bg1) !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    .ant-modal-title {
+      color: var(--text-1) !important;
+    }
+    .ant-modal-close {
+      color: var(--text-3) !important;
+      &:hover {
+        color: var(--text-1) !important;
+      }
+    }
+    .ant-form-item-label label {
+      color: var(--text-2) !important;
+    }
+    .ant-modal-body {
+      padding-top: @sp-4 !important;
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: @sp-1;
+}
+
+.avatarSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: @sp-3;
+}
+
+.avatarLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  :global {
+    .ant-form-item-label {
+      text-align: center;
+    }
+  }
+}
+
+.nameFields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: @sp-4;
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+    gap: @sp-1;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: @sp-3;
+  margin-top: @sp-4;
+  border-top: 1px solid @border;
+  padding-top: @sp-4;
+}

@@ -1,0 +1,229 @@
+@import '../../styles/tokens.less';
+
+.pg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: @sp-6;
+    padding-bottom: @sp-8;
+}
+
+.head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.title {
+    font-size: @text-2xl;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: @text-1;
+}
+
+.sub {
+    font-size: @text-sm;
+    color: @text-2;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.toggleOpt {
+    font-size: @text-sm;
+    color: @text-2;
+    cursor: pointer;
+    transition: @ease-fast;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.toggleOptOn {
+    color: @text-1;
+}
+
+.togglePill {
+    width: 40px;
+    height: 22px;
+    background: @bg2;
+    border: 1px solid @border;
+    border-radius: 11px;
+    position: relative;
+    cursor: pointer;
+    transition: @ease-fast;
+}
+
+.togglePillOn {
+    border-color: rgba(232, 255, 87, .3);
+}
+
+.toggleKnob {
+    width: 16px;
+    height: 16px;
+    background: @text-3;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left .2s, background .2s;
+
+    .togglePillOn & {
+        background: @accent;
+        left: 20px;
+    }
+}
+
+.saveBadge {
+    display: inline-flex;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 500;
+    background: @success-bg;
+    color: @success;
+}
+
+.plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.plan {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    transition: border-color .12s;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.planFeatured {
+    border-color: rgba(232, 255, 87, .22) !important;
+    background: rgba(232, 255, 87, .025);
+}
+
+.popularBadge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: @accent;
+    color: @accent-fg;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.planName {
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.planPrice {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.planAmount {
+    font-size: 30px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1;
+}
+
+.planAmountAccent {
+    color: @accent;
+}
+
+.planPeriod {
+    font-size: 12px;
+    color: @text-3;
+}
+
+.planDesc {
+    font-size: 12px;
+    color: @text-2;
+    line-height: 1.5;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+}
+
+.feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: @text-2;
+}
+
+.featureCheck {
+    color: @success;
+    font-size: 11px;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.planBtn {
+    height: 36px;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: @ease-fast;
+    width: 100%;
+}
+
+.planBtnPrimary {
+    background: @accent;
+    color: @accent-fg;
+    border-color: @accent;
+
+    &:hover {
+        background: @accent-hover;
+    }
+}
+
+.planBtnSecondary {
+    background: @bg2;
+    color: @text-1;
+    border-color: @border;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.planBtnCurrent {
+    background: @success-bg;
+    color: @success;
+    border-color: rgba(62, 207, 142, .2);
+    cursor: default;
+}

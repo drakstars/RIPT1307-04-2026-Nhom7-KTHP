@@ -1,0 +1,112 @@
+@import '../../../styles/tokens.less';
+
+.body { padding: 20px 28px; display: flex; flex-direction: column; gap: 14px; }
+.centered { display: flex; justify-content: center; padding: 64px 0; }
+.loading { display: flex; justify-content: center; padding: 40px 0; }
+
+.toolbar { display: flex; gap: 8px; align-items: center; }
+.searchWrap { position: relative; max-width: 240px; flex: 1; }
+.searchIcon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: @text-3; font-size: 12px; }
+.searchInp {
+  width: 100%; height: 30px; background: @bg1;
+  border: 1px solid @border; border-radius: @r;
+  padding: 0 10px 0 28px; color: @text-1;
+  font-size: 12px; font-family: @font-base; outline: none;
+  transition: @ease-fast;
+  &::placeholder { color: @text-3; }
+  &:focus { border-color: rgba(255,91,91,.3); }
+}
+.filters { display: flex; gap: 4px; }
+.filter {
+  height: 28px; padding: 0 10px; background: @bg1;
+  border: 1px solid @border; border-radius: @r-sm;
+  font-size: 11px; color: @text-2; font-family: @font-base; cursor: pointer;
+  transition: @ease-fast;
+  &:hover { border-color: @border-hover; color: @text-1; }
+}
+.filterOn { border-color: rgba(255,91,91,.25) !important; color: @danger !important; background: @danger-bg !important; }
+
+.tableWrap {
+  background: @bg1; border: 1px solid @border; border-radius: @r; overflow: hidden;
+}
+
+.table { width: 100%; border-collapse: collapse; }
+.table thead th {
+  padding: 9px 14px; text-align: left;
+  font-size: 10px; font-weight: 500; letter-spacing: .07em;
+  text-transform: uppercase; color: @text-3;
+  border-bottom: 1px solid rgba(255,255,255,.06); background: @bg2;
+  white-space: nowrap;
+}
+.table tbody tr { transition: background .1s; cursor: default; }
+.table tbody tr:hover { background: @bg2; }
+.table tbody tr:hover .rowActions { opacity: 1; }
+.table td {
+  padding: 10px 14px; font-size: 12px; color: @text-1;
+  border-bottom: 1px solid rgba(255, 255, 255, .04); vertical-align: middle;
+}
+.table tr:last-child td { border-bottom: none; }
+
+.userCell { display: flex; align-items: center; gap: 8px; }
+.avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: @bg3; border: 1px solid @border;
+  color: @text-2; font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.userEmail { font-size: 12px; color: @text-1; }
+.userId { font-size: 10px; color: @text-3; font-family: monospace; }
+
+.muted { color: @text-2 !important; }
+.num { font-variant-numeric: tabular-nums; color: @text-2; }
+
+.badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: @r-sm; font-size: 11px; font-weight: 500; }
+.badgeAccent  { background: @accent-dim; color: @accent; }
+.badgeGreen   { background: @success-bg; color: @success; }
+.badgeDanger  { background: @danger-bg; color: @danger; }
+.badgeNeutral { background: @bg3; color: @text-2; border: 1px solid @border; }
+
+.rowActions { display: flex; gap: 3px; opacity: 0; transition: opacity .12s; }
+.iconBtn {
+  width: 26px; height: 26px; border-radius: @r-sm;
+  background: transparent; border: 1px solid transparent;
+  color: @text-3; cursor: pointer; font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transition: @ease-fast;
+  &:hover { background: @bg3; color: @text-1; border-color: @border; }
+}
+.iconBtnDanger { &:hover { background: @danger-bg !important; color: @danger !important; border-color: rgba(255,91,91,.2) !important; } }
+.iconBtnWarn   { &:hover { background: @warn-bg !important; color: @warn !important; border-color: rgba(246,166,35,.2) !important; } }
+
+/* Modal styles */
+.modalBody { padding: 16px 0; display: flex; flex-direction: column; gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.label { font-size: 11px; color: @text-2; }
+.inp {
+  height: 32px; background: @bg2; border: 1px solid @border; border-radius: @r;
+  padding: 0 10px; color: @text-1; font-size: 12px; font-family: @font-base;
+  outline: none; transition: @ease-fast; width: 100%;
+  &:focus { border-color: rgba(255,91,91,.4); }
+  &::placeholder { color: @text-3; }
+}
+.twoCol { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modalFoot { display: flex; justify-content: flex-end; gap: 8px; padding-top: 6px; }
+
+/* Buttons */
+.btnPrimary {
+  height: 30px; padding: 0 14px; background: @danger; color: #fff;
+  border: none; border-radius: @r; font-size: 12px; font-weight: 500;
+  font-family: @font-base; cursor: pointer; transition: @ease-fast;
+  &:hover { background: darken(@danger, 8%); }
+  &:disabled { opacity: .5; cursor: not-allowed; }
+}
+.btnSecondary {
+  height: 30px; padding: 0 12px; background: @bg2; color: @text-1;
+  border: 1px solid @border; border-radius: @r; font-size: 12px;
+  font-family: @font-base; cursor: pointer; transition: @ease-fast;
+  &:hover { border-color: @border-hover; }
+}
+
+.green { color: @success !important; }
+.warn { color: @warn !important; }
+.danger { color: @danger !important; }
