@@ -1,0 +1,393 @@
+@import '@/styles/tokens.less';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+// ... phần còn lại
+
+:global {
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  background: @bg0;
+}
+
+body {
+  font-family: @font-base;
+  font-size: @text-base;
+  font-weight: 400;
+  color: @text-1;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: @text-1;
+}
+
+// ─── Scrollbar ────────────────────────────────────────────
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: @bg3; border-radius: 3px; }
+
+// ─── Selection ────────────────────────────────────────────
+::selection {
+  background: @accent-dim;
+  color: @accent;
+}
+
+// ─── Ant Design overrides — global ────────────────────────
+// Tắt hết styling mặc định của Ant, override từ đầu
+
+.ant-btn {
+  font-family: @font-base !important;
+  font-size: @text-sm !important;
+  font-weight: 500 !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  border-radius: @r !important;
+  transition: @ease-fast !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.ant-btn-primary {
+  background: @accent !important;
+  color: @accent-fg !important;
+  border-color: @accent !important;
+  box-shadow: none !important;
+
+  &:hover {
+    background: @accent-hover !important;
+    border-color: @accent-hover !important;
+  }
+}
+
+.ant-btn-default {
+  background: @bg2 !important;
+  color: @text-1 !important;
+  border-color: @border !important;
+
+  &:hover {
+    background: @bg3 !important;
+    border-color: @border-hover !important;
+    color: @text-1 !important;
+  }
+}
+
+.ant-btn-text {
+  background: transparent !important;
+  color: @text-2 !important;
+  border-color: transparent !important;
+
+  &:hover {
+    background: @bg2 !important;
+    color: @text-1 !important;
+  }
+}
+
+.ant-btn-dangerous {
+  background: transparent !important;
+  color: @danger !important;
+  border-color: rgba(255, 91, 91, 0.25) !important;
+
+  &:hover {
+    background: @danger-bg !important;
+    border-color: @danger !important;
+  }
+}
+
+.ant-btn-sm {
+  height: 28px !important;
+  padding: 0 10px !important;
+  font-size: @text-xs !important;
+}
+
+// Input
+.ant-input,
+.ant-input-affix-wrapper {
+  background: @bg1 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  color: @text-1 !important;
+  font-family: @font-base !important;
+  font-size: @text-sm !important;
+  box-shadow: none !important;
+  transition: @ease-fast !important;
+
+  &::placeholder { color: @text-3 !important; }
+
+  &:hover { border-color: @border-hover !important; }
+
+  &:focus, &.ant-input-affix-wrapper-focused {
+    border-color: @border-focus !important;
+    box-shadow: 0 0 0 3px rgba(232, 255, 87, 0.06) !important;
+  }
+}
+
+.ant-input-textarea textarea {
+  background: @bg1 !important;
+  color: @text-1 !important;
+  font-family: @font-base !important;
+}
+
+// Select
+.ant-select-selector {
+  background: @bg1 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  color: @text-1 !important;
+}
+
+.ant-select-dropdown {
+  background: @bg2 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4) !important;
+}
+
+.ant-select-item {
+  color: @text-2 !important;
+  font-size: @text-sm !important;
+  border-radius: @r-sm !important;
+
+  &:hover, &.ant-select-item-option-active {
+    background: @bg3 !important;
+    color: @text-1 !important;
+  }
+
+  &.ant-select-item-option-selected {
+    background: @accent-dim !important;
+    color: @accent !important;
+  }
+}
+
+// Form label
+.ant-form-item-label label {
+  color: @text-2 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+
+// Card
+.ant-card {
+  background: @bg1 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  color: @text-1 !important;
+
+  .ant-card-head {
+    background: transparent !important;
+    border-bottom: 1px solid @border !important;
+    color: @text-1 !important;
+    font-size: @text-base !important;
+    font-weight: 500 !important;
+    min-height: 44px !important;
+  }
+
+  .ant-card-body { padding: 20px !important; }
+}
+
+// Table
+.ant-table {
+  background: @bg1 !important;
+  color: @text-1 !important;
+  border-radius: @r !important;
+  border: 1px solid @border !important;
+  overflow: hidden !important;
+
+  .ant-table-thead th {
+    background: @bg2 !important;
+    color: @text-3 !important;
+    font-size: @text-xs !important;
+    font-weight: 500 !important;
+    letter-spacing: .06em !important;
+    text-transform: uppercase !important;
+    border-bottom: 1px solid @border !important;
+  }
+
+  .ant-table-row {
+    &:hover td { background: @bg2 !important; }
+  }
+
+  td {
+    border-bottom: 1px solid @border !important;
+    color: @text-1 !important;
+    font-size: @text-sm !important;
+  }
+}
+
+// Modal
+.ant-modal-content {
+  background: @bg1 !important;
+  border: 1px solid @border !important;
+  border-radius: @r-lg !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5) !important;
+}
+
+.ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid @border !important;
+  padding: 16px 20px !important;
+}
+
+.ant-modal-title {
+  color: @text-1 !important;
+  font-size: @text-base !important;
+  font-weight: 500 !important;
+}
+
+.ant-modal-close { color: @text-3 !important; &:hover { color: @text-1 !important; } }
+
+// Popconfirm / Popover / Tooltip
+.ant-popover-content, .ant-popover-inner {
+  background: @bg2 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4) !important;
+}
+
+.ant-tooltip-inner {
+  background: @bg3 !important;
+  color: @text-1 !important;
+  font-size: 12px !important;
+  border-radius: @r-sm !important;
+  box-shadow: none !important;
+}
+
+// Message / Notification
+.ant-message-notice-content {
+  background: @bg2 !important;
+  border: 1px solid @border !important;
+  border-radius: @r !important;
+  color: @text-1 !important;
+  font-size: @text-sm !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4) !important;
+}
+
+// Tag / Badge
+.ant-tag {
+  background: @bg3 !important;
+  border: 1px solid @border !important;
+  color: @text-2 !important;
+  border-radius: @r-sm !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+}
+
+// Progress
+.ant-progress-bg {
+  background: @accent !important;
+}
+.ant-progress-inner {
+  background: @bg3 !important;
+}
+
+// Spin
+.ant-spin-dot-item { background: @accent !important; }
+
+// Skeleton
+.ant-skeleton-element .ant-skeleton-input,
+.ant-skeleton-content .ant-skeleton-title,
+.ant-skeleton-content .ant-skeleton-paragraph li {
+  background: linear-gradient(90deg, @bg2 25%, @bg3 50%, @bg2 75%) !important;
+  background-size: 400% 100% !important;
+}
+
+// Divider
+.ant-divider {
+  border-color: @border !important;
+  color: @text-3 !important;
+  font-size: 11px !important;
+}
+
+// Switch
+.ant-switch {
+  background: @bg3 !important;
+  &.ant-switch-checked {
+    background: @accent !important;
+  }
+}
+
+// InputNumber
+.ant-input-number {
+  background: @bg1 !important;
+  border-color: @border !important;
+  color: @text-1 !important;
+  .ant-input-number-input {
+    background: transparent !important;
+    color: @text-1 !important;
+  }
+  .ant-input-number-handler-wrap {
+    background: @bg2 !important;
+    border-color: @border !important;
+    .ant-input-number-handler {
+      border-color: @border !important;
+      color: @text-2 !important;
+      &:hover { color: @text-1 !important; }
+    }
+  }
+}
+
+// Segmented
+.ant-segmented {
+  background: @bg2 !important;
+  .ant-segmented-item {
+    color: @text-2 !important;
+    &:hover { color: @text-1 !important; }
+    &.ant-segmented-item-selected {
+      background: @bg3 !important;
+      color: @text-1 !important;
+    }
+  }
+  .ant-segmented-thumb { background: @bg3 !important; }
+}
+
+// Disabled input
+.ant-input[disabled],
+.ant-input-affix-wrapper-disabled {
+  background: @bg2 !important;
+  color: @text-3 !important;
+  border-color: @border !important;
+  cursor: not-allowed;
+}
+
+// TextArea show-count
+.ant-input-show-count-suffix {
+  color: @text-3 !important;
+  font-size: 11px !important;
+}
+
+// Modal mask (backdrop)
+.ant-modal-mask { background: rgba(0, 0, 0, 0.65) !important; }
+
+// Popconfirm / Popover inner text
+.ant-popover-inner-content,
+.ant-popover-message-title,
+.ant-popconfirm-message-title,
+.ant-popconfirm-description { color: @text-1 !important; }
+
+.ant-popover-title { color: @text-1 !important; border-bottom: 1px solid @border !important; }
+
+// Radio button group (accent picker)
+.ant-radio-button-wrapper {
+  background: @bg2 !important;
+  color: @text-2 !important;
+  border-color: @border !important;
+  &:hover { color: @text-1 !important; border-color: @border-hover !important; }
+  &.ant-radio-button-wrapper-checked {
+    background: @accent-dim !important;
+    color: @accent !important;
+    border-color: @accent !important;
+  }
+  &::before { background: @border !important; }
+}
+
+// Form help text / extra
+.ant-form-item-extra,
+.ant-form-item-explain-error { font-size: 11px !important; }
+}

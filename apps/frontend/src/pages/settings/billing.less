@@ -1,0 +1,271 @@
+@import '../../styles/tokens.less';
+
+.pg {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: @sp-8;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.top {
+    margin-bottom: @sp-2;
+}
+
+.title {
+    font-size: @text-xl;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: @text-1;
+}
+
+.card {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 20px;
+}
+
+.cardHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.cardTitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.planRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.planName {
+    font-size: 17px;
+    font-weight: 500;
+    color: @text-1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.planDetail {
+    font-size: 12px;
+    color: @text-3;
+    margin-top: 4px;
+}
+
+.planPriceBlock {
+    text-align: right;
+}
+
+.planPrice {
+    font-size: 24px;
+    font-weight: 500;
+    color: @accent;
+}
+
+.planPricePeriod {
+    font-size: 12px;
+    color: @text-3;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 7px;
+    border-radius: @r-sm;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.badgeGreen {
+    background: @success-bg;
+    color: @success;
+}
+
+.badgeWarn {
+    background: @warn-bg;
+    color: @warn;
+}
+
+.badgeRed {
+    background: @danger-bg;
+    color: @danger;
+}
+
+.badgeNeutral {
+    background: @bg3;
+    color: @text-2;
+    border: 1px solid @border;
+}
+
+.usageList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.usageRow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.usageHead {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.usageLabel {
+    color: @text-2;
+}
+
+.usageVal {
+    color: @text-1;
+    font-weight: 500;
+}
+
+.usageBar {
+    height: 3px;
+    background: @bg3;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.usageFill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width .4s;
+}
+
+.fillNorm {
+    background: @accent;
+}
+
+.fillWarn {
+    background: @warn;
+}
+
+.fillFull {
+    background: @danger;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: @text-3;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid @border;
+}
+
+.table td {
+    padding: 10px 0;
+    font-size: @text-sm;
+    color: @text-1;
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.muted {
+    color: @text-2 !important;
+}
+
+.dangerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dangerLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.dangerSub {
+    font-size: 12px;
+    color: @text-2;
+    margin-top: 3px;
+}
+
+.btnAccent {
+    height: 28px;
+    padding: 0 12px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+}
+
+.btnSm {
+    height: 24px;
+    padding: 0 10px;
+    background: @bg2;
+    color: @text-2;
+    border: 1px solid @border;
+    border-radius: @r-sm;
+    font-size: 11px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+        color: @text-1;
+    }
+}
+
+.btnDanger {
+    height: 30px;
+    padding: 0 12px;
+    background: transparent;
+    color: @danger;
+    border: 1px solid rgba(255, 91, 91, .2);
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @danger-bg;
+    }
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+}

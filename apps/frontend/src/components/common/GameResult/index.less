@@ -1,0 +1,105 @@
+@import '../../../styles/tokens.less';
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: @sp-5;
+    padding: @sp-7 0;
+    text-align: center;
+}
+
+.circle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 2px solid @accent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pct {
+    font-size: 26px;
+    font-weight: 500;
+    color: @accent;
+    line-height: 1;
+}
+
+.sub {
+    font-size: 11px;
+    color: @text-3;
+}
+
+.label {
+    font-size: 17px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.stats {
+    display: flex;
+    gap: @sp-7;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.statVal {
+    font-size: 22px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 10px;
+    color: @text-3;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.actions {
+    display: flex;
+    gap: @sp-2;
+}
+
+.btnPrimary {
+    height: 34px;
+    padding: 0 18px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+}
+
+.btnSecondary {
+    height: 34px;
+    padding: 0 14px;
+    background: @bg2;
+    color: @text-1;
+    border: 1px solid @border;
+    border-radius: @r;
+    font-size: @text-sm;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}

@@ -1,0 +1,136 @@
+@import '../../../styles/tokens.less';
+
+.wrap { position: relative; }
+
+/* Trigger */
+.trigger {
+  display: flex; align-items: center; gap: 8px;
+  height: 32px; padding: 0 10px;
+  background: @bg1; border: 1px solid @border; border-radius: @r;
+  cursor: pointer; transition: @ease-fast; width: 100%;
+  font-family: @font-base; text-align: left;
+
+  &:hover { border-color: @border-hover; }
+}
+
+.triggerIcon { font-size: 14px; color: @text-3; flex-shrink: 0; }
+.triggerText { font-size: 12px; color: @text-2; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.kbd {
+  font-size: 10px; color: @text-3;
+  background: @bg2; border: 1px solid @border;
+  border-radius: 3px; padding: 1px 5px;
+  flex-shrink: 0;
+}
+
+/* Panel */
+.panel {
+  position: absolute; bottom: 40px; left: 0;
+  width: 320px; background: @bg1;
+  border: 1px solid rgba(255,255,255,.12); border-radius: @r-lg;
+  box-shadow: 0 -8px 32px rgba(0,0,0,.4);
+  z-index: 200; overflow: hidden;
+  animation: slideUp .15s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panelSearch {
+  display: flex; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.panelInp {
+  flex: 1; height: 40px; background: transparent; border: none;
+  padding: 0 14px; color: @text-1; font-size: 13px;
+  font-family: @font-base; outline: none;
+  &::placeholder { color: @text-3; }
+}
+
+.panelGo {
+  width: 36px; height: 36px; background: transparent; border: none;
+  color: @text-3; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: @ease-fast; flex-shrink: 0;
+  &:hover { color: @accent; }
+}
+
+.panelBody { padding: 14px 16px; max-height: 280px; overflow-y: auto; }
+
+.hint     { font-size: 12px; color: @text-3; padding: 4px 0; }
+.noResult { font-size: 12px; color: @text-2; padding: 4px 0; }
+
+/* Loading skeletons */
+.loadingWrap { display: flex; flex-direction: column; gap: 8px; }
+
+.skelWord {
+  height: 20px; width: 130px; border-radius: @r-sm;
+  background: linear-gradient(90deg, @bg2 25%, @bg3 50%, @bg2 75%);
+  background-size: 400% 100%; animation: shimmer 1.4s infinite;
+}
+
+.skelLine {
+  height: 13px; border-radius: @r-sm;
+  background: linear-gradient(90deg, @bg2 25%, @bg3 50%, @bg2 75%);
+  background-size: 400% 100%; animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+
+/* Result */
+.resultWrap { display: flex; flex-direction: column; gap: 0; }
+
+.widgetWord { font-size: 20px; font-weight: 500; color: @text-1; letter-spacing: -.01em; margin-bottom: 4px; }
+
+.widgetPhRow { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.widgetPh    { font-size: 12px; color: @text-2; font-style: italic; }
+
+.widgetPlay {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: @bg2; border: 1px solid @border;
+  color: @text-3; cursor: pointer; font-size: 10px;
+  display: flex; align-items: center; justify-content: center;
+  transition: @ease-fast;
+  &:hover { color: @accent; border-color: rgba(232,255,87,.2); }
+}
+.widgetPlayOn { background: @accent-dim !important; border-color: rgba(232,255,87,.3) !important; color: @accent !important; }
+
+.widgetMeaning { margin-bottom: 10px; }
+
+.widgetPos {
+  display: block; font-size: 10px; font-weight: 500; font-style: italic;
+  color: @accent; text-transform: uppercase; letter-spacing: .06em;
+  margin-bottom: 4px;
+}
+
+.widgetDef { font-size: 12px; color: @text-1; line-height: 1.6; margin-bottom: 4px; }
+.widgetEx  { font-size: 11px; color: @text-2; font-style: italic; border-left: 2px solid @border; padding-left: 7px; }
+
+/* Footer */
+.panelFoot {
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.fullPageBtn {
+  font-size: 11px; color: @text-3; background: transparent;
+  border: none; cursor: pointer; font-family: @font-base;
+  transition: @ease-fast; padding: 0;
+  &:hover { color: @text-2; }
+}
+
+.addBtn {
+  height: 24px; padding: 0 10px;
+  background: @accent-dim; border: 1px solid rgba(232,255,87,.2);
+  border-radius: @r-sm; color: @accent;
+  font-size: 11px; font-family: @font-base; cursor: pointer;
+  transition: @ease-fast;
+  &:hover { background: rgba(232,255,87,.18); }
+}

@@ -1,0 +1,58 @@
+@import '../../../styles/tokens.less';
+
+.wrap {
+    width: 100%;
+}
+
+.bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 90px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    height: 100%;
+}
+
+.valLabel {
+    font-size: 10px;
+    color: @text-3;
+    margin-bottom: 3px;
+    height: 14px;
+    line-height: 14px;
+}
+
+.barWrap {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 100%;
+    background: rgba(232, 255, 87, 0.2);
+    border-radius: 3px 3px 0 0;
+    transition: height .4s cubic-bezier(.4, 0, .2, 1);
+    min-height: 0;
+}
+
+.barToday {
+    background: @accent;
+}
+
+.dayLabel {
+    font-size: 10px;
+    color: @text-3;
+    margin-top: 5px;
+}
+
+.dayToday {
+    color: @accent;
+}

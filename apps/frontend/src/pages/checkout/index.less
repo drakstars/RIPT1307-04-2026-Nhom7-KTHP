@@ -1,0 +1,267 @@
+@import '../../styles/tokens.less';
+
+.pg {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: @sp-4;
+    padding-bottom: @sp-8;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.toastOk,
+.toastErr {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    padding: 12px 20px;
+    border-radius: @r;
+    font-size: 13px;
+    font-family: @font-base;
+    font-weight: 500;
+    animation: fadeInDown .25s ease;
+    pointer-events: none;
+}
+.toastOk {
+    background: rgba(62, 207, 142, .15);
+    border: 1px solid rgba(62, 207, 142, .4);
+    color: #3ECF8E;
+}
+.toastErr {
+    background: rgba(255, 91, 91, .12);
+    border: 1px solid rgba(255, 91, 91, .3);
+    color: #FF5B5B;
+}
+
+
+.backBtn {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: @text-2;
+    border: 1px solid transparent;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: start;
+}
+
+.form {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.mockNotice {
+    background: @warn-bg;
+    border: 1px solid rgba(246, 166, 35, .2);
+    border-radius: @r;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: @warn;
+    line-height: 1.5;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.label {
+    font-size: 12px;
+    color: @text-2;
+}
+
+.inp {
+    height: 36px;
+    background: @bg2;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 0 12px;
+    color: @text-1;
+    font-size: @text-sm;
+    font-family: @font-base;
+    outline: none;
+    transition: @ease-fast;
+    width: 100%;
+
+    &:focus {
+        border-color: @border-focus;
+        box-shadow: 0 0 0 3px rgba(232, 255, 87, .05);
+    }
+
+    &::placeholder {
+        color: @text-3;
+    }
+}
+
+.inpErr {
+    border-color: rgba(255, 91, 91, .4) !important;
+}
+
+.errMsg {
+    font-size: 11px;
+    color: @danger;
+}
+
+.twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.payBtn {
+    height: 40px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+}
+
+.secureNote {
+    text-align: center;
+    font-size: 11px;
+    color: @text-3;
+}
+
+.orderCard {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: sticky;
+    top: 24px;
+}
+
+.orderHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 1px solid @border;
+}
+
+.orderPlanName {
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.orderBilling {
+    font-size: 12px;
+    color: @text-3;
+    margin-top: 3px;
+}
+
+.orderPrice {
+    font-size: 20px;
+    font-weight: 500;
+    color: @accent;
+}
+
+.orderPeriod {
+    font-size: 12px;
+    color: @text-3;
+}
+
+.orderRows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.orderRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: @text-1;
+}
+
+.orderRowLabel {
+    color: @text-2;
+}
+
+.green {
+    color: @success;
+}
+
+.orderTotal {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid @border;
+    font-size: 14px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.orderTotalAmount {
+    color: @accent;
+}
+
+.orderFeatures {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.orderFeature {
+    font-size: 12px;
+    color: @text-2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.orderCheck {
+    color: @success;
+    font-size: 11px;
+}

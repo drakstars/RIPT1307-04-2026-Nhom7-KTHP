@@ -1,0 +1,193 @@
+@import '../../../styles/tokens.less';
+
+.wrap {
+    position: relative;
+}
+
+.bell {
+    width: 34px;
+    height: 34px;
+    border-radius: @r;
+    background: transparent;
+    border: 1px solid transparent;
+    color: @text-2;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+.badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background: @danger;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    line-height: 1;
+}
+
+.dropdown {
+    position: absolute;
+    left: -150px;
+    top: 42px;
+    width: 320px;
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r-lg;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+    z-index: 200;
+    overflow: hidden;
+    animation: slideDown .15s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid @border;
+}
+
+.dropTitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.markAllBtn {
+    font-size: 11px;
+    color: @accent;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: @font-base;
+    transition: @ease-fast;
+
+    &:hover {
+        opacity: .8;
+    }
+}
+
+.list {
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.empty {
+    padding: 32px 16px;
+    text-align: center;
+    font-size: 13px;
+    color: @text-3;
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+    cursor: pointer;
+    transition: background .1s;
+    position: relative;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: @bg2;
+    }
+
+    &:hover .deleteBtn {
+        opacity: 1;
+    }
+}
+
+.itemUnread {
+    background: rgba(232, 255, 87, .03);
+    border-left: 2px solid rgba(232, 255, 87, .3);
+}
+
+.itemIcon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    width: 20px;
+    text-align: center;
+}
+
+.itemContent {
+    flex: 1;
+    min-width: 0;
+}
+
+.itemTitle {
+    font-size: 13px;
+    font-weight: 500;
+    color: @text-1;
+    line-height: 1.3;
+}
+
+.itemBody {
+    font-size: 12px;
+    color: @text-2;
+    margin-top: 3px;
+    line-height: 1.4;
+}
+
+.itemTime {
+    font-size: 10px;
+    color: @text-3;
+    margin-top: 5px;
+}
+
+.deleteBtn {
+    opacity: 0;
+    width: 18px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    color: @text-3;
+    font-size: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @danger-bg;
+        color: @danger;
+    }
+}

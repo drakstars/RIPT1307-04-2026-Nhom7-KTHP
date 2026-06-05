@@ -1,0 +1,207 @@
+@import '../../styles/tokens.less';
+
+.pg {
+    display: flex;
+    flex-direction: column;
+    gap: @sp-6;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.title {
+    font-size: @text-xl;
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: @text-1;
+}
+
+.sub {
+    font-size: @text-sm;
+    color: @text-2;
+    margin-top: 4px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    padding: 64px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.card {
+    background: @bg1;
+    border: 1px solid @border;
+    border-radius: @r;
+    padding: 18px 20px;
+    transition: border-color .12s;
+    cursor: default;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.cardEmpty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: @text-sm;
+    color: @text-3;
+    border-style: dashed;
+    cursor: pointer;
+
+    &:hover {
+        color: @text-2;
+    }
+}
+
+.cardHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.cardTitle {
+    font-size: @text-base;
+    font-weight: 500;
+    color: @text-1;
+}
+
+.cardSub {
+    font-size: 11px;
+    color: @text-3;
+    margin-top: 3px;
+}
+
+.progBar {
+    height: 1.5px;
+    background: @bg3;
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.progFill {
+    height: 100%;
+    background: @accent;
+    border-radius: 1px;
+    transition: width .4s;
+}
+
+.cardFoot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: @r-sm;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.neutral {
+    background: @bg3;
+    color: @text-2;
+    border: 1px solid @border;
+}
+
+.success {
+    background: @success-bg;
+    color: @success;
+}
+
+.warn {
+    background: @warn-bg;
+    color: @warn;
+}
+
+.btnPrimary {
+    height: 28px;
+    padding: 0 12px;
+    background: @accent;
+    color: @accent-fg;
+    border: none;
+    border-radius: @r;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @accent-hover;
+    }
+
+    &:disabled {
+        opacity: .6;
+        cursor: not-allowed;
+    }
+}
+
+.btnSecondary {
+    height: 28px;
+    padding: 0 12px;
+    background: @bg2;
+    color: @text-1;
+    border: 1px solid @border;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        border-color: @border-hover;
+    }
+}
+
+.btnGhost {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: @text-2;
+    border: 1px solid transparent;
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @bg2;
+        color: @text-1;
+    }
+}
+
+.btnDanger {
+    height: 28px;
+    padding: 0 10px;
+    background: transparent;
+    color: @danger;
+    border: 1px solid rgba(255, 91, 91, .2);
+    border-radius: @r;
+    font-size: 12px;
+    font-family: @font-base;
+    cursor: pointer;
+    transition: @ease-fast;
+
+    &:hover {
+        background: @danger-bg;
+    }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }

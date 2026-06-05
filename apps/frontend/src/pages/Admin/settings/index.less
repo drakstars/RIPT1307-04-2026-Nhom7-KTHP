@@ -1,0 +1,58 @@
+@import '../../../styles/tokens.less';
+
+.body { padding: 20px 28px; display: flex; flex-direction: column; gap: 12px; }
+.twoCol { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.card {
+  background: @bg1; border: 1px solid @border; border-radius: @r; padding: 18px 20px;
+}
+
+.cardTitle { font-size: 13px; font-weight: 500; color: @text-1; margin-bottom: 14px; }
+
+.fields { display: flex; flex-direction: column; gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.label { font-size: 12px; color: @text-2; }
+.inp {
+  height: 34px; background: @bg2; border: 1px solid @border; border-radius: @r;
+  padding: 0 12px; color: @text-1; font-size: 13px; font-family: @font-base;
+  outline: none; transition: @ease-fast; width: 100%;
+  &:focus { border-color: rgba(255,91,91,.4); }
+  &::placeholder { color: @text-3; }
+}
+
+.actionList { display: flex; flex-direction: column; gap: 4px; }
+.actionRow {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 14px; background: @bg2; border-radius: @r;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.actionLabel { font-size: 13px; font-weight: 500; color: @text-1; }
+.actionSub { font-size: 11px; color: @text-3; margin-top: 2px; }
+
+.toggleBtn {
+  height: 28px; padding: 0 14px; background: @bg3;
+  border: 1px solid @border; border-radius: @r; font-size: 12px;
+  color: @text-2; font-family: @font-base; cursor: pointer; transition: @ease-fast;
+  &:hover { border-color: @border-hover; color: @text-1; }
+}
+.toggleBtnOn {
+  background: @danger-bg !important;
+  border-color: rgba(255,91,91,.3) !important;
+  color: @danger !important;
+}
+
+.actionBtn {
+  height: 28px; padding: 0 14px; background: @bg1;
+  border: 1px solid @border; border-radius: @r; font-size: 12px;
+  color: @text-1; font-family: @font-base; cursor: pointer; transition: @ease-fast;
+  &:hover { border-color: @border-hover; background: @bg3; }
+  &:disabled { opacity: .5; cursor: not-allowed; }
+}
+
+.btnPrimary {
+  height: 30px; padding: 0 14px; background: @danger; color: #fff;
+  border: none; border-radius: @r; font-size: 12px; font-weight: 500;
+  font-family: @font-base; cursor: pointer; transition: @ease-fast;
+  &:hover { background: darken(@danger, 8%); }
+  &:disabled { opacity: .5; cursor: not-allowed; }
+}

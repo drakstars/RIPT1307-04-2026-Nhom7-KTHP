@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: elp-mysql-nhom7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: '12345678'
+      MYSQL_DATABASE: 'root'
+    ports:
+      - '3307:3306'
+    volumes:
+      - elp-mysql-data:/var/lib/mysql
+
+volumes:
+  elp-mysql-data:

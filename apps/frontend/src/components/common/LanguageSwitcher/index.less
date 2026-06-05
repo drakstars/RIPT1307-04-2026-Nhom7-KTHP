@@ -1,0 +1,49 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.select {
+  width: 130px;
+  :global {
+    .ant-select-selector {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 8px !important;
+      color: var(--accent-fg, inherit) !important;
+      transition: all 0.2s ease !important;
+
+      &:hover {
+        border-color: var(--accent) !important;
+      }
+    }
+    
+    .ant-select-arrow {
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+  }
+}
+
+.dropdown {
+  :global {
+    .ant-select-item {
+      border-radius: 4px;
+      margin: 2px 4px;
+    }
+  }
+}
+
+:global([data-theme='light']) {
+  .select {
+    :global {
+      .ant-select-selector {
+        background: rgba(0, 0, 0, 0.03) !important;
+        border-color: rgba(0, 0, 0, 0.1) !important;
+        color: inherit !important;
+      }
+      .ant-select-arrow {
+        color: rgba(0, 0, 0, 0.4) !important;
+      }
+    }
+  }
+}

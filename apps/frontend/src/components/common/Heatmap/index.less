@@ -1,0 +1,71 @@
+@import '../../../styles/tokens.less';
+
+.wrap {
+    position: relative;
+}
+
+.grid {
+    display: flex;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: opacity .12s;
+
+    &:hover {
+        opacity: .75;
+    }
+}
+
+.level0 {
+    background: #1C1C1F;
+}
+
+.level1 {
+    background: rgba(232, 255, 87, 0.2);
+}
+
+.level2 {
+    background: rgba(232, 255, 87, 0.42);
+}
+
+.level3 {
+    background: rgba(232, 255, 87, 0.68);
+}
+
+.level4 {
+    background: #E8FF57;
+}
+
+.tooltip {
+    position: fixed;
+    background: @bg3;
+    border: 1px solid @border;
+    border-radius: @r-sm;
+    padding: 4px 8px;
+    font-size: 11px;
+    color: @text-1;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+    transform: translateX(-50%);
+}
+
+.legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: @text-3;
+}
+
+.legendCells {
+    display: flex;
+    gap: 3px;
+}
