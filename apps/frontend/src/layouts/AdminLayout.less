@@ -1,0 +1,136 @@
+@import '../styles/tokens.less';
+
+.shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: @bg0;
+}
+
+.sidebar {
+  width: 192px;
+  flex-shrink: 0;
+  background: @bg1;
+  border-right: 1px solid @border;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 14px 14px;
+  border-bottom: 1px solid @border;
+}
+
+.logoMark {
+  width: 24px; height: 24px;
+  background: @danger; color: #fff;
+  border-radius: @r-sm;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; flex-shrink: 0;
+}
+
+.logoText {
+  font-size: 13px; font-weight: 500; color: @text-1;
+  letter-spacing: .04em; display: flex; align-items: center; gap: 6px;
+}
+
+.adminTag {
+  font-size: 9px; font-weight: 500;
+  background: @danger-bg; color: @danger;
+  border-radius: 3px; padding: 1px 5px;
+  letter-spacing: .04em;
+}
+
+.nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 6px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.navSection {
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: .1em; color: @text-3;
+  font-weight: 500; padding: 10px 8px 4px;
+}
+
+.navItem {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 10px; border-radius: @r-sm;
+  font-size: 12px; font-weight: 400;
+  color: @text-2; background: transparent;
+  border: 1px solid transparent; cursor: pointer;
+  width: 100%; text-align: left; transition: @ease-fast;
+  font-family: @font-base;
+
+  &:hover { background: @bg2; color: @text-1; }
+}
+
+.navItemOn {
+  background: @danger-bg !important;
+  color: @danger !important;
+  border-color: rgba(255,91,91,.15) !important;
+}
+
+.navIcon { font-size: 13px; width: 16px; text-align: center; flex-shrink: 0; }
+
+.footer {
+  border-top: 1px solid @border;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerUser {
+  display: flex; align-items: center; gap: 8px; padding: 0 2px;
+}
+
+.avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: @bg3; border: 1px solid @border;
+  color: @text-2; font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.footerInfo { flex: 1; min-width: 0; }
+.footerEmail { font-size: 12px; font-weight: 500; color: @text-1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.footerRole { font-size: 10px; color: @text-3; margin-top: 2px; }
+
+.footerActions { display: flex; gap: 6px; }
+
+.backBtn {
+  flex: 1; height: 26px; background: transparent;
+  color: @text-3; border: 1px solid @border; border-radius: @r-sm;
+  font-size: 11px; font-family: @font-base; cursor: pointer;
+  transition: @ease-fast;
+  &:hover { color: @text-2; border-color: @border-hover; }
+}
+
+.logoutBtn {
+  flex: 1; height: 26px; background: transparent;
+  color: @danger; border: 1px solid rgba(255,91,91,.2); border-radius: @r-sm;
+  font-size: 11px; font-family: @font-base; cursor: pointer;
+  transition: @ease-fast;
+  &:hover { background: @danger-bg; }
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background: @bg0;
+  position: relative;
+}
+
+.topRightHeader {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 50;
+}
