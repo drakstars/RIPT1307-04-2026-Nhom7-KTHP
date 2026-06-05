@@ -7,11 +7,13 @@ import {
   selectCurrentCard,
   selectIsSessionDone,
 } from '@/stores/flashcards.store';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './study.less';
 
 const StudyPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { startSession, flip, markCard, nextCard, resetSession, isFlipped } =
     useFlashcardStore();
@@ -66,26 +68,26 @@ const StudyPage: React.FC = () => {
     return (
       <div className={styles.result}>
         <div className={styles.resultEmoji}>🎉</div>
-        <div className={styles.resultTitle}>Hoàn thành phiên học!</div>
-        <div className={styles.resultSub}>Bạn đã học {progressTotal} thẻ</div>
+        <div className={styles.resultTitle}>{t('sessionCompletedTitle')}</div>
+        <div className={styles.resultSub}>{t('sessionCompletedSub').replace('{total}', progressTotal.toString())}</div>
 
         <div className={styles.resultStats}>
           <div className={styles.statItem}>
             <span className={`${styles.statNum} ${styles.green}`}>{progressKnown}</span>
-            <span className={styles.statLabel}>Known</span>
+            <span className={styles.statLabel}>{t('knownLabel')}</span>
           </div>
           <div className={styles.statItem}>
             <span className={`${styles.statNum} ${styles.amber}`}>{progressNeedReview}</span>
-            <span className={styles.statLabel}>Review</span>
+            <span className={styles.statLabel}>{t('reviewLabel')}</span>
           </div>
         </div>
 
         <div className={styles.resultActions}>
           <button className={styles.outlineBtn} onClick={() => set.flashcards && startSession(set.flashcards)}>
-            ↺ Học lại
+            {t('studyAgainBtn')}
           </button>
           <button className={styles.primaryBtn} onClick={() => navigate('/flashcards')}>
-            ← Quay lại bộ thẻ
+            {t('backToSetBtn')}
           </button>
         </div>
       </div>
@@ -102,7 +104,7 @@ const StudyPage: React.FC = () => {
       {/* Header */}
       <div className={styles.header}>
         <button className={styles.exitBtn} onClick={() => navigate('/flashcards')}>
-          ← Thoát
+          {t('exitBtn')}
         </button>
         <span className={styles.setTitle}>{set.title}</span>
         <span className={styles.counter}>{progressCurrent}/{progressTotal}</span>
@@ -115,8 +117,8 @@ const StudyPage: React.FC = () => {
 
       {/* Stats */}
       <div className={styles.statsBar}>
-        <span className={`${styles.stat} ${styles.known}`}>✓ {progressKnown} thuộc</span>
-        <span className={`${styles.stat} ${styles.review}`}>◌ {progressNeedReview} cần ôn</span>
+        <span className={`${styles.stat} ${styles.known}`}>✓ {t('knownCountLabel').replace('{count}', progressKnown.toString())}</span>
+        <span className={`${styles.stat} ${styles.review}`}>◌ {t('needReviewCountLabel').replace('{count}', progressNeedReview.toString())}</span>
       </div>
 
       {/* Flip Card */}
@@ -125,7 +127,7 @@ const StudyPage: React.FC = () => {
           <div className={`${styles.cardInner} ${isFlipped ? styles.flipped : ''}`}>
             {/* Front */}
             <div className={styles.face + ' ' + styles.front}>
-              <span className={styles.faceLabel}>Mặt trước · nhấn để lật</span>
+              <span className={styles.faceLabel}>{t('frontSideInstruction')}</span>
               <div className={styles.cardWord}>{currentCard.front}</div>
               {currentCard.hint && (
                 <div className={styles.cardHint}>💡 {currentCard.hint}</div>
@@ -133,7 +135,7 @@ const StudyPage: React.FC = () => {
             </div>
             {/* Back */}
             <div className={styles.face + ' ' + styles.back}>
-              <span className={styles.faceLabel}>Mặt sau</span>
+              <span className={styles.faceLabel}>{t('backSideLabel')}</span>
               <div className={styles.cardWord}>{currentCard.back}</div>
             </div>
           </div>
@@ -144,14 +146,14 @@ const StudyPage: React.FC = () => {
       {isFlipped ? (
         <div className={styles.actions}>
           <button className={styles.btnReview} onClick={() => handleMark('NEED_REVIEW')}>
-            ✕ Cần ôn lại
+            {t('needReviewActionBtn')}
           </button>
           <button className={styles.btnKnown} onClick={() => handleMark('KNOWN')}>
-            ✓ Đã thuộc
+            {t('knownActionBtn')}
           </button>
         </div>
       ) : (
-        <div className={styles.tapHint}>Nhấn vào thẻ để xem đáp án</div>
+        <div className={styles.tapHint}>{t('flipCardInstructionHint')}</div>
       )}
     </div>
   );

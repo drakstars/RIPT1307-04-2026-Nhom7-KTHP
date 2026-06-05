@@ -3,11 +3,13 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'umi';
 import { flashcardService } from '@/services/flashcards.service';
 import type { FlashcardSet } from '@/types/flashcards.type';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './index.less';
 
 const FlashcardListPage: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { data: sets, isLoading } = useQuery({
     queryKey: ['flashcard-sets'],
@@ -31,21 +33,21 @@ const FlashcardListPage: React.FC = () => {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
-          <div className={styles.heading}>Flashcard</div>
-          <div className={styles.sub}>Học từ vựng theo phương pháp lặp lại ngắt quãng</div>
+          <div className={styles.heading}>{t('flashcards')}</div>
+          <div className={styles.sub}>{t('flashcardsSub')}</div>
         </div>
         <button className={styles.createBtn} onClick={() => navigate('/flashcards/create')}>
-          + Bộ thẻ mới
+          {t('newSetBtn')}
         </button>
       </div>
 
       {!sets?.length ? (
         <div className={styles.empty}>
           <div className={styles.emptyIcon}>⬡</div>
-          <div className={styles.emptyTitle}>Chưa có bộ thẻ nào</div>
-          <div className={styles.emptySub}>Tạo bộ thẻ đầu tiên để bắt đầu học từ vựng</div>
+          <div className={styles.emptyTitle}>{t('noSetsTitle')}</div>
+          <div className={styles.emptySub}>{t('noSetsSub')}</div>
           <button className={styles.createBtn} onClick={() => navigate('/flashcards/create')}>
-            + Tạo bộ thẻ
+            {t('createSetBtn')}
           </button>
         </div>
       ) : (
@@ -68,14 +70,14 @@ const FlashcardListPage: React.FC = () => {
 
               <div className={styles.cardMeta}>
                 <span className={styles.cardBadge}>
-                  {set._count?.flashcards ?? 0} thẻ
+                  {set._count?.flashcards ?? set.flashcards?.length ?? 0} {t('cardsUnit')}
                 </span>
                 <div className={styles.cardActions}>
                   <button
                     className={`${styles.actionBtn} ${styles.danger}`}
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (confirm('Xóa bộ thẻ này?')) deleteMutation.mutate(set.id);
+                      if (confirm(t('deleteSetConfirm'))) deleteMutation.mutate(set.id);
                     }}
                     title="Delete"
                   >

@@ -5,6 +5,7 @@ import { flashcardService } from '@/services/flashcards.service';
 import { quizService } from '@/services/quiz.service';
 import type { CreateQuizPayload } from '@/types/quiz.types';
 import type { FlashcardSet } from '@/types/flashcards.type';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './create.less';
 
 // ─── Small toggle switch ─────────────────────────────────
@@ -19,6 +20,7 @@ const Toggle: React.FC<{ checked: boolean; onChange: (v: boolean) => void }> = (
 const CreateQuizPage: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { t, language } = useTranslation();
 
   const [title, setTitle] = useState('');
   const [setId, setSetId] = useState('');
@@ -50,18 +52,18 @@ const CreateQuizPage: React.FC = () => {
       queryClient.invalidateQueries({ queryKey: ['quizzes'] });
       navigate(`/quiz/${data.id}/play`);
     },
-    onError: () => setError('Không thể tạo bài kiểm tra. Vui lòng thử lại.'),
+    onError: () => setError(t('failedToCreateQuiz')),
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) { setError('Vui lòng nhập tiêu đề'); return; }
-    if (!setId) { setError('Vui lòng chọn bộ thẻ flashcard'); return; }
+    if (!title.trim()) { setError(t('titleRequiredQuizError')); return; }
+    if (!setId) { setError(t('selectSetError')); return; }
     if (!includeMultipleChoice && !includeTrueFalse && !includeFillInBlank) {
-      setError('Vui lòng chọn ít nhất một dạng câu hỏi');
+      setError(t('selectQuestionTypeError'));
       return;
     }
-    if (totalCards === 0) { setError('Bộ thẻ này chưa có thẻ nào'); return; }
+    if (totalCards === 0) { setError(t('emptySetError')); return; }
     setError('');
 
     createMutation.mutate({
@@ -78,29 +80,29 @@ const CreateQuizPage: React.FC = () => {
 
   return (
     <form className={styles.page} onSubmit={handleSubmit}>
-      <button type="button" className={styles.back} onClick={() => navigate('/quiz')}>← Quay lại</button>
+      <button type="button" className={styles.back} onClick={() => navigate('/quiz')}>{t('backBtn')}</button>
 
       <div>
-        <div className={styles.heading}>Tạo bài kiểm tra</div>
-        <div className={styles.sub}>Tự động tạo câu hỏi từ bộ thẻ flashcard</div>
+        <div className={styles.heading}>{t('createNewQuizTitle')}</div>
+        <div className={styles.sub}>{t('autoQuizSub')}</div>
       </div>
 
       {/* Basic info */}
       <div className={styles.section}>
-        <div className={styles.sectionTitle}>Thông tin bài kiểm tra</div>
+        <div className={styles.sectionTitle}>{language === 'vi' ? 'Thông tin bài kiểm tra' : 'Quiz Details'}</div>
 
         <div className={styles.field}>
-          <label className={styles.label}>Tiêu đề *</label>
+          <label className={styles.label}>{t('setTitleLabel')}</label>
           <input
             className={styles.input}
-            placeholder="VD: Kiểm tra từ vựng IELTS"
+            placeholder={t('quizTitlePlaceholder')}
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
         </div>
 
         <div className={styles.field}>
-          <label className={styles.label}>Bộ thẻ flashcard *</label>
+          <label className={styles.label}>{t('selectFlashcardSet')}</label>
           <select
             className={styles.select}
             value={setId}
@@ -108,13 +110,13 @@ const CreateQuizPage: React.FC = () => {
             disabled={loadingSets}
           >
             <option value="">
-              {loadingSets ? 'Đang tải…' : 'Chọn bộ thẻ'}
+              {loadingSets ? t('loadingSelectText') : t('chooseSetPlaceholder')}
             </option>
             {sets?.map((s: FlashcardSet) => {
               const count = s._count?.flashcards ?? s.flashcards?.length ?? 0;
               return (
                 <option key={s.id} value={s.id} disabled={count === 0}>
-                  {s.title} — {count} thẻ{count === 0 ? ' (rỗng)' : ''}
+                  {s.title} — {count} {t('cardsUnit')}{count === 0 ? ` (${t('emptySetLabel')})` : ''}
                 </option>
               );
             })}
@@ -124,8 +126,8 @@ const CreateQuizPage: React.FC = () => {
         {setId && totalCards > 0 && (
           <div className={styles.field}>
             <label className={styles.label}>
-              Số lượng câu hỏi
-              <span className={styles.labelNote}>tối đa {totalCards}</span>
+              {t('questionsCountLabel')}
+              <span className={styles.labelNote}>{t('maxQuestionsNote').replace('{count}', totalCards.toString())}</span>
             </label>
             <input
               type="number"
@@ -140,8 +142,8 @@ const CreateQuizPage: React.FC = () => {
 
         <div className={styles.toggleRow}>
           <div className={styles.toggleInfo}>
-            <span className={styles.toggleLabel}>Xáo trộn câu hỏi</span>
-            <span className={styles.toggleDesc}>Thứ tự ngẫu nhiên mỗi lần làm</span>
+            <span className={styles.toggleLabel}>{t('shuffleQuestionsLabel')}</span>
+            <span className={styles.toggleDesc}>{t('shuffleQuestionsDesc')}</span>
           </div>
           <Toggle checked={shuffle} onChange={setShuffle} />
         </div>
@@ -149,12 +151,12 @@ const CreateQuizPage: React.FC = () => {
 
       {/* Question types */}
       <div className={styles.section}>
-        <div className={styles.sectionTitle}>Dạng câu hỏi</div>
+        <div className={styles.sectionTitle}>{t('questionTypeSection')}</div>
         <div className={styles.checkList}>
           {[
-            { label: 'Trắc nghiệm', checked: includeMultipleChoice, set: setIncludeMultipleChoice },
-            { label: 'Đúng / Sai', checked: includeTrueFalse, set: setIncludeTrueFalse },
-            { label: 'Điền vào chỗ trống', checked: includeFillInBlank, set: setIncludeFillInBlank },
+            { label: t('multipleChoiceLabel'), checked: includeMultipleChoice, set: setIncludeMultipleChoice },
+            { label: t('trueFalseLabel'), checked: includeTrueFalse, set: setIncludeTrueFalse },
+            { label: t('fillInBlankLabel'), checked: includeFillInBlank, set: setIncludeFillInBlank },
           ].map(({ label, checked, set }) => (
             <label key={label} className={styles.checkItem}>
               <input
@@ -172,15 +174,15 @@ const CreateQuizPage: React.FC = () => {
       <div className={styles.section}>
         <div className={styles.toggleRow}>
           <div className={styles.toggleInfo}>
-            <span className={styles.toggleLabel}>Giới hạn thời gian mỗi câu</span>
-            <span className={styles.toggleDesc}>Đếm ngược hiển thị cho mỗi câu hỏi</span>
+            <span className={styles.toggleLabel}>{t('timeLimitLabel')}</span>
+            <span className={styles.toggleDesc}>{t('timeLimitDesc')}</span>
           </div>
           <Toggle checked={enableTimer} onChange={setEnableTimer} />
         </div>
 
         {enableTimer && (
           <div className={styles.field}>
-            <label className={styles.label}>Số giây mỗi câu</label>
+            <label className={styles.label}>{t('secsPerQuestionLabel')}</label>
             <input
               type="number"
               className={styles.numInput}
@@ -196,9 +198,9 @@ const CreateQuizPage: React.FC = () => {
       {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.actions}>
-        <button type="button" className={styles.cancelBtn} onClick={() => navigate('/quiz')}>Hủy</button>
+        <button type="button" className={styles.cancelBtn} onClick={() => navigate('/quiz')}>{t('cancelBtn')}</button>
         <button type="submit" className={styles.submitBtn} disabled={createMutation.isPending}>
-          {createMutation.isPending ? 'Đang tạo…' : 'Tạo bài kiểm tra →'}
+          {createMutation.isPending ? t('creatingBtn') : t('createNewQuizBtn')}
         </button>
       </div>
     </form>

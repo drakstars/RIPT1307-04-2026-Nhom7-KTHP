@@ -3,11 +3,13 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'umi';
 import { quizService } from '@/services/quiz.service';
 import type { Quiz } from '@/types/quiz.types';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './index.less';
 
 const QuizListPage: React.FC = () => {
     const navigate = useNavigate();
     const qc = useQueryClient();
+    const { t } = useTranslation();
 
     const { data: quizzes, isLoading } = useQuery({
         queryKey: ['quizzes'],
@@ -21,7 +23,7 @@ const QuizListPage: React.FC = () => {
 
     const getStatus = (quiz: Quiz) => {
         const last = quiz.attempts?.[0];
-        if (!last) return { label: 'Chưa làm', cls: 'neutral' };
+        if (!last) return { label: t('notAttemptedYet'), cls: 'neutral' };
         const pct = Math.round((last.score / last.totalQ) * 100);
         return { label: `${last.score}/${last.totalQ} · ${pct}%`, cls: pct >= 80 ? 'success' : 'warn' };
     };
@@ -36,11 +38,11 @@ const QuizListPage: React.FC = () => {
         <div className={styles.pg}>
             <div className={styles.top}>
                 <div>
-                    <h1 className={styles.title}>Kiểm tra</h1>
-                    <p className={styles.sub}>{quizzes?.length ?? 0} bài kiểm tra · ôn luyện kiến thức</p>
+                    <h1 className={styles.title}>{t('quiz')}</h1>
+                    <p className={styles.sub}>{quizzes?.length ?? 0} {t('quizzesCountUnit')} · {t('quizSub')}</p>
                 </div>
                 <button className={styles.btnPrimary} onClick={() => navigate('/quiz/create')}>
-                    + Tạo bài kiểm tra
+                    {t('createNewQuizBtn')}
                 </button>
             </div>
 
@@ -55,8 +57,8 @@ const QuizListPage: React.FC = () => {
                                 <div>
                                     <div className={styles.cardTitle}>{quiz.title}</div>
                                     <div className={styles.cardSub}>
-                                        {quiz._count?.questions ?? 0} câu hỏi
-                                        {quiz.timeLimitSecs && ` · ${quiz.timeLimitSecs}s mỗi câu`}
+                                        {t('questionsCount').replace('{count}', (quiz._count?.questions ?? 0).toString())}
+                                        {quiz.timeLimitSecs && ` · ${t('secsPerQuestion').replace('{secs}', quiz.timeLimitSecs.toString())}`}
                                     </div>
                                 </div>
                                 <span className={`${styles.badge} ${styles[status.cls]}`}>
@@ -78,22 +80,24 @@ const QuizListPage: React.FC = () => {
                             <div className={styles.cardFoot}>
                                 <button
                                     className={styles.btnDanger}
-                                    onClick={() => { if (confirm('Xóa bài kiểm tra này?')) deleteMutation.mutate(quiz.id); }}
-                                >Xóa</button>
+                                    onClick={() => { if (confirm(t('deleteQuizConfirm'))) deleteMutation.mutate(quiz.id); }}
+                                >
+                                    {t('deleteBtn')}
+                                </button>
                                 <div style={{ display: 'flex', gap: 6 }}>
                                     {attempted && (
                                         <button
                                             className={styles.btnGhost}
                                             onClick={() => navigate(`/quiz/${quiz.id}/result`)}
                                         >
-                                            Xem lại
+                                            {t('reviewQuizBtn')}
                                         </button>
                                     )}
                                     <button
                                         className={styles.btnPrimary}
                                         onClick={() => navigate(`/quiz/${quiz.id}/play`)}
                                     >
-                                        {attempted ? 'Làm lại →' : 'Bắt đầu →'}
+                                        {attempted ? t('retakeQuizBtn') : t('startQuizBtn')}
                                     </button>
                                 </div>
                             </div>
@@ -105,7 +109,7 @@ const QuizListPage: React.FC = () => {
                     className={`${styles.card} ${styles.cardEmpty}`}
                     onClick={() => navigate('/quiz/create')}
                 >
-                    + Tạo bài kiểm tra mới
+                    {t('createNewQuizTitle')}
                 </div>
             </div>
         </div>

@@ -6,6 +6,7 @@ import { flashcardService } from '@/services/flashcards.service';
 import { buildMatchingPairs, shuffle } from '@/utils/game.utils';
 import { useMatchingGame } from '@/hooks/useMatchingGame';
 import GameResult from '@/components/common/GameResult';
+import { useTranslation } from '@/hooks/useTranslation';
 import styles from './matching.less';
 
 const MatchingGamePage: React.FC = () => {
@@ -13,9 +14,10 @@ const MatchingGamePage: React.FC = () => {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
     const setId = params.get('set');
+    const { t } = useTranslation();
 
     const { data: sets, isLoading } = useQuery({
-        queryKey: ['flashcard-sets-with-cards'],
+        queryKey: ['flashcard-sets-with-cards', setId],
         queryFn: async () => {
             const all = await flashcardService.getSets();
             // Load first valid set if no setId
@@ -43,10 +45,23 @@ const MatchingGamePage: React.FC = () => {
 
     const startedAt = React.useRef(Date.now());
 
+    React.useEffect(() => {
+        if (gameOver && matched.size > 0) {
+            matched.forEach(pairId => {
+                flashcardService.recordStudy(pairId, 'KNOWN').catch(e => console.error('Error recording study:', e));
+            });
+        }
+    }, [gameOver, matched]);
+
     if (isLoading) return <div className={styles.centered}><Spin /></div>;
     if (!pairs.length) return (
         <div className={styles.centered}>
-            <p style={{ color: '#8A8A8E' }}>Not enough cards. <span style={{ color: '#E8FF57', cursor: 'pointer' }} onClick={() => navigate('/flashcards/create')}>Add more →</span></p>
+            <p style={{ color: '#8A8A8E' }}>
+                {t('notEnoughCardsNotice')}{' '}
+                <span style={{ color: '#E8FF57', cursor: 'pointer' }} onClick={() => navigate('/flashcards/create')}>
+                    {t('gamesCreateSetLink')}
+                </span>
+            </p>
         </div>
     );
 
@@ -74,7 +89,7 @@ const MatchingGamePage: React.FC = () => {
         <div className={styles.pg}>
             {/* Top bar */}
             <div className={styles.topBar}>
-                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← Exit</button>
+                <button className={styles.exitBtn} onClick={() => navigate('/games')}>← {t('exitBtnText')}</button>
                 <div className={styles.stats}>
                     <div className={styles.statPill}>
                         ⏱ <span className={`${styles.statVal} ${timeLeft <= 10 ? styles.warn : ''}`}>{timeLeft}s</span>
@@ -82,7 +97,7 @@ const MatchingGamePage: React.FC = () => {
                     <div className={styles.statPill}>✓ <span className={styles.statVal}>{score}</span></div>
                     <div className={styles.statPill}>✗ <span className={styles.statVal}>{errors}</span></div>
                 </div>
-                <button className={styles.restartBtn} onClick={() => { reset(); startedAt.current = Date.now(); }}>Restart</button>
+                <button className={styles.restartBtn} onClick={() => { reset(); startedAt.current = Date.now(); }}>{t('restartBtnText')}</button>
             </div>
 
             {/* Progress bar */}
@@ -97,7 +112,7 @@ const MatchingGamePage: React.FC = () => {
             <div className={styles.grid}>
                 {/* Words column */}
                 <div className={styles.col}>
-                    <div className={styles.colLabel}>Word</div>
+                    <div className={styles.colLabel}>{t('wordColLabel')}</div>
                     {wordOrder.map(pair => {
                         const isMatch = matched.has(pair.id);
                         const isSel = isSelected(pair.id, 'word');
@@ -107,10 +122,10 @@ const MatchingGamePage: React.FC = () => {
                             <button
                                 key={pair.id + '-word'}
                                 className={`${styles.card}
-                  ${isMatch ? styles.cardMatched : ''}
-                  ${isSel ? styles.cardSelected : ''}
-                  ${isWr ? styles.cardWrong : ''}
-                `}
+                   ${isMatch ? styles.cardMatched : ''}
+                   ${isSel ? styles.cardSelected : ''}
+                   ${isWr ? styles.cardWrong : ''}
+                 `}
                                 onClick={() => selectCard(pair.id + '-word', 'word', pair.id)}
                                 disabled={isMatch}
                             >
@@ -122,7 +137,7 @@ const MatchingGamePage: React.FC = () => {
 
                 {/* Defs column */}
                 <div className={styles.col}>
-                    <div className={styles.colLabel}>Meaning</div>
+                    <div className={styles.colLabel}>{t('meaningColLabel')}</div>
                     {defOrder.map(pair => {
                         const isMatch = matched.has(pair.id);
                         const isSel = isSelected(pair.id, 'def');
@@ -132,10 +147,10 @@ const MatchingGamePage: React.FC = () => {
                             <button
                                 key={pair.id + '-def'}
                                 className={`${styles.card}
-                  ${isMatch ? styles.cardMatched : ''}
-                  ${isSel ? styles.cardSelected : ''}
-                  ${isWr ? styles.cardWrong : ''}
-                `}
+                   ${isMatch ? styles.cardMatched : ''}
+                   ${isSel ? styles.cardSelected : ''}
+                   ${isWr ? styles.cardWrong : ''}
+                 `}
                                 onClick={() => selectCard(pair.id + '-def', 'def', pair.id)}
                                 disabled={isMatch}
                             >

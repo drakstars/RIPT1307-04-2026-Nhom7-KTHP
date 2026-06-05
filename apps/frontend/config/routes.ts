@@ -5,7 +5,7 @@ export default [
   },
   {
     path: '/landing',
-    component: '@/pages/index',
+    component: '@/pages/landing/index',
   },
   {
     path: '/login',
