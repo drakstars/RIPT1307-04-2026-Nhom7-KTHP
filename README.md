@@ -288,14 +288,52 @@ Bai_Tap_lon/
 
 ## 👥 Thành viên Nhóm 7 — Phân chia công việc
 
-| # | Thành viên | Vai trò | Đóng góp chính |
-|:---:|:---|:---|:---|
-| 1 | **Trần Hải Đăng** | Lead · Backend | DB Schema, toàn bộ API, Seed data, Google OAuth Backend, Docker setup, README |
-| 2 | **Vũ Minh Hiếu** | Frontend Security | Route Guards, Dynamic Theme, Modal Cài Đặt & Hồ Sơ, Google Login Frontend |
-| 3 | **Trần Tiến Đạt** | Frontend Layout | AdminLayout, UserLayout, DictionaryWidget, Dark Mode, Landing Page |
-| 4 | **Nguyễn Trung Kiên** | Frontend Pages | Dashboard Admin, Quản lý Users, Trang từ điển, Trang khóa học & YouTube |
+### 1.1. Backend & Landing Page & Core Pages (Nguyễn Trung Kiên & Trần Hải Đăng)
 
-📋 Chi tiết phân công: [PHAN_CHIA_CONG_VIEC.md](./PHAN_CHIA_CONG_VIEC.md)
+#### **Nguyễn Trung Kiên** (Leader · Main Backend & Core FE Pages)
+* **Backend:**
+  * Cấu hình cơ sở dữ liệu gốc, Docker Compose (MySQL 8) & Prisma Schema migrations.
+  * API Xác thực hệ thống (`auth/` - JWT đăng ký/đăng nhập & Google OAuth Backend).
+  * API Quản lý từ vựng (`vocabularies/`).
+  * API Bài kiểm tra & Lịch sử làm bài (`quiz/`).
+  * API Thống kê tiến độ, hoạt động học và streak (`stats/`).
+* **Frontend (Trang cốt lõi):**
+  * Trang chủ giới thiệu Landing Page.
+  * Trang Dashboard học viên (Dashboard từ vựng, biểu đồ heatmap và streak học tập).
+  * Trang Luyện gõ phím tiếng Anh (`typewords`).
+  * Trang giao diện Gia sư AI Chatbot (`chatbot/`).
+* **Tên nhánh Feature:** `feature/landing-dashboard-typewords-auth`
+
+#### **Trần Hải Đăng** (Backend Core)
+* **Backend:**
+  * API Tích hợp Gia sư thông minh AI Chatbot (`chat/` - Tích hợp với Groq API/OpenAI).
+  * API Khóa học & Bài học (`courses/` - nội dung Markdown và nhúng YouTube player).
+  * API Thanh toán, nâng cấp tài khoản & Quản lý Subscription (`payment/`).
+  * API Chuông thông báo (`notifications/`).
+  * API Tải ảnh đại diện và lưu trữ cục bộ (`upload/`).
+  * Bộ API Quản trị Admin (`admin/` - Các endpoints thống kê doanh thu MRR, biểu đồ KPI, quản lý Người dùng và cài đặt hệ thống).
+* **Tên nhánh Feature:** `feature/backend-core-apis`
+
+### 1.2. Frontend (Vũ Minh Hiếu & Trần Tiến Đạt)
+
+#### **Vũ Minh Hiếu** (Frontend Auth & Security & Course Pages)
+* **Frontend:**
+  * Thiết lập Bảo vệ định tuyến (`AdminRoute.tsx`, `ProtectedRoute.tsx` - Route guards bảo vệ quyền User/Admin).
+  * Trang Đăng nhập & Đăng ký (Login/Register, tích hợp nút đăng nhập nhanh Google Sign-In).
+  * Trang Khóa học & Bài học (Giao diện hiển thị bài đọc Markdown, video YouTube responsive).
+  * Modals Cá nhân: Sửa hồ sơ, Cài đặt tài khoản, đổi mật khẩu, upload ảnh đại diện avatar.
+* **Tên nhánh Feature:** `feature/auth-security-routeguards`
+
+#### **Trần Tiến Đạt** (Frontend Layouts & Dictionary & Games)
+* **Frontend:**
+  * Thiết lập giao diện chung (`AdminLayout`, `UserLayout` với thanh sidebar điều hướng và nút chuyển Admin ↔ User).
+  * Tính năng Từ điển thông minh (Widget tra từ nổi mọi lúc + Trang tra từ chi tiết, phát âm thanh chuẩn IPA, lịch sử 5 từ gần nhất).
+  * Trang ôn tập từ vựng qua thẻ lật ghi nhớ (Flashcard & Spaced Repetition).
+  * Trọn bộ 3 Trò chơi học từ: Memory Card, Matching (Ghép đôi), Drag & Drop (Kéo thả).
+  * Trang Bảng giá dịch vụ (`pricing`), Trang Thanh toán (`checkout`), Đăng ký gói VIP.
+  * Cổng Quản trị Admin: Trang Dashboard (Doanh thu MRR, KPI), các trang quản lý người dùng, quản lý bộ từ vựng, quản lý khóa học, quản lý bài kiểm tra và thanh toán.
+  * Chế độ Dark / Light mode (Dynamic Theme) toàn diện cùng thiết lập tokens CSS.
+* **Tên nhánh Feature:** `feature/layouts-dictionary-games`
 
 ---
 
