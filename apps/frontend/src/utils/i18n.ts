@@ -120,6 +120,17 @@ export const translations: Record<string, Record<string, string>> = {
     nextLessonBtn: "Bài tiếp theo →",
     savingText: "Đang lưu tiến độ...",
     markAsCompleteBtn: "Hoành thành bài học ✔",
+    courseLessonsLabel: "Bài học",
+    courseStatsDone: "Đã hoàn thành",
+    courseProgressLabel: "Tiến độ khóa học",
+    lessonDoneBadge: "Đã xong",
+    lessonCurrentBadge: "Đang học",
+    lessonLockedBadge: "Chưa mở",
+    reviewCourseBtn: "Ôn tập khóa học",
+    continueCourseBtn: "Học tiếp",
+    unenrollBtn: "Hủy đăng ký",
+    enrollFreeBtn: "Đăng ký học",
+
 
     // Quizzes / Tests
     timerUnit: "giây",
@@ -471,6 +482,16 @@ export const translations: Record<string, Record<string, string>> = {
     nextLessonBtn: "Next Lesson →",
     savingText: "Saving progress...",
     markAsCompleteBtn: "Mark Lesson as Completed ✔",
+    courseLessonsLabel: "Lessons",
+    courseStatsDone: "Completed",
+    courseProgressLabel: "Course Progress",
+    lessonDoneBadge: "Done",
+    lessonCurrentBadge: "Current",
+    lessonLockedBadge: "Locked",
+    reviewCourseBtn: "Review Course",
+    continueCourseBtn: "Continue",
+    unenrollBtn: "Unenroll",
+    enrollFreeBtn: "Enroll Free",
 
     // Quizzes / Tests
     timerUnit: "seconds",

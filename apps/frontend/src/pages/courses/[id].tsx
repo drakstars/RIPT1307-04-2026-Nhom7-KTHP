@@ -59,7 +59,7 @@ const CourseDetailPage: React.FC = () => {
     return (
         <div className={styles.pg}>
             <button className={styles.backBtn} onClick={() => navigate('/courses')}>
-                ← {t('coursesBackBtn')}
+                {t('coursesBackBtn')}
             </button>
 
             <div className={styles.layout}>
